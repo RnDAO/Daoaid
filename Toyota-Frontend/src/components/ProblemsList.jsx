@@ -141,7 +141,7 @@ const Problems = ({ problem }) => {
 
   useEffect(() => {
     if (problem) getUpVotes();
-  }, [problem]);
+  }, [problem, userId]);
 
   return (
     <div className="h-[82px] flex mb-2 ">

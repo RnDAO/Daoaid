@@ -207,7 +207,7 @@ const Problems = ({ problem }) => {
 
   useEffect(() => {
     if (problem) getUpVotes();
-  }, [problem]);
+  }, [problem, userId]);
   return (
     <div className="md:h-[120px] lg:h-[82px] flex mb-2 ">
       <div className="w-[5%] max-w-8 ">

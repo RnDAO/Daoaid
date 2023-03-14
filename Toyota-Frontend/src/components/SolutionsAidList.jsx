@@ -211,7 +211,7 @@ const Solutions = ({ solution }) => {
 
   useEffect(() => {
     if (solution) getUpVotes();
-  }, [solution]);
+  }, [solution, userId]);
 
   return (
     <Link

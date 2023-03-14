@@ -26,11 +26,7 @@ TimeAgo.addDefaultLocale(en);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <WagmiConfig client={client}>
-        <ConnectKitProvider>
-          <App />
-        </ConnectKitProvider>
-      </WagmiConfig>
+      <App />
     </BrowserRouter>
   </React.StrictMode>
 );

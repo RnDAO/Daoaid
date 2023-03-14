@@ -15,22 +15,28 @@ import CommentFormModal from "./components/CommentFormModal";
 import { setGlobalState, useGlobalState } from "./store";
 
 import { Toaster } from "react-hot-toast";
+import { verifyNetwork } from "./Blockchain.services";
 function App() {
-  const { address, isConnecting, isDisconnected } = useAccount();
-  console.log(isDisconnected);
-  const [userId] = useGlobalState("userId");
+  const [connectedAddress] = useGlobalState("connectedAddress");
+  // const { address, isConnecting, isDisconnected } = useAccount();
+  // console.log(isDisconnected);
+  // const [userId] = useGlobalState("userId");
+  // useEffect(() => {
+  //   if (connectedAddress) {
+  //     //check if user is already logged in
+  //     if (userId) return;
+  //     login(connectedAddress);
+  //     //setGlobalState("connectedAddress", address);
+  //   } else {
+  //     window.localStorage.removeItem("access_token");
+  //     setGlobalState("connectedAddress", "");
+  //     setGlobalState("userId", "");
+  //   }
+  // }, [connectedAddress]);
+
   useEffect(() => {
-    if (address) {
-      //check if user is already logged in
-      if (userId) return;
-      login(address);
-      setGlobalState("connectedAddress", address);
-    } else {
-      window.localStorage.removeItem("access_token");
-      setGlobalState("connectedAddress", "");
-      setGlobalState("userId", "");
-    }
-  }, [address]);
+    verifyNetwork();
+  }, []);
 
   return (
     <div className=" min-h-screen bg-bodyBg   ">
