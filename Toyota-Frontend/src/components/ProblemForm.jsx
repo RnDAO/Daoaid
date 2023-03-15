@@ -117,7 +117,7 @@ const ProblemForm = () => {
             <button
               disabled=""
               type="button"
-              class="text-white w-full flex justify-center bg-btnBlue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2  inline-flex items-center"
+              class="text-white w-full justify-center bg-btnBlue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2  inline-flex items-center"
             >
               <svg
                 aria-hidden="true"

@@ -220,9 +220,9 @@ const Solutions = ({ solution }) => {
         setGlobalState("selectedSolution", solution);
         setGlobalState("comments", []);
       }}
-      className="md:h-[120px] lg:h-[100px] flex mb-2 "
+      className="h-auto  flex mb-2 "
     >
-      <div className="w-[3%] max-w-8 ">
+      <div className="w-[3%] pt-[22px] h-full max-w-8 ">
         {voted && (
           <div className="h-[50%]   flex items-end justify-end font-semibold text-sm text-rnBlack mb-0.5">
             <button
@@ -256,25 +256,27 @@ const Solutions = ({ solution }) => {
       </div>
       <div className="w-[97%] ml-1 bg-white hover:shadow-lg shadow-gray-500 flex  rounded-md h-full px-4">
         <div className="w-[80%] h-full flex flex-col">
-          <div className="h-[50%] normal   flex items-end font-semibold text-sm text-rnBlack">
+          <div className="h-[41px] normal   flex items-end font-semibold text-sm text-rnBlack">
             <span>
               {solution.title.charAt(0).toUpperCase() + solution.title.slice(1)}
             </span>
           </div>
-          <div className="h-[50%] text-textGray  flex items-start  text-xs">
-            <span>
-              {solution.description.substr(0, 260)}{" "}
-              {solution.description.length > 260 ? ". . ." : ""}
-            </span>
+          <div className="h-auto min-h-[41px] pb-2 pr-2 text-textGray  flex items-start  text-xs">
+            {solution.description.substr(0, 260)}{" "}
+            {solution.description.length > 260 ? ". . ." : ""}
           </div>
         </div>
-        <div className="w-[20%] h-full flex items-center justify-center ">
-          <button
-            type="button"
-            className="bg-grayShadeBorder text-textGray text-xs font-semibold rounded-full border-blueShadeBorder py-1 cursor-pointer px-2"
-          >
-            Problem tag
-          </button>
+        <div className="w-[20%] h-[100px] flex  items-center justify-center ">
+          {solution.problemsSolved &&
+            solution.problemsSolved.map((problem, id) => (
+              <button
+                type="button"
+                key={id}
+                className="bg-grayShadeBorder text-textGray text-xs font-semibold rounded-full border-blueShadeBorder py-1 cursor-pointer px-2"
+              >
+                {problem.title}
+              </button>
+            ))}
         </div>
       </div>
     </Link>

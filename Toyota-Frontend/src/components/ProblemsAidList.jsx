@@ -209,8 +209,8 @@ const Problems = ({ problem }) => {
     if (problem) getUpVotes();
   }, [problem, userId]);
   return (
-    <div className="md:h-[120px] lg:h-[82px] flex mb-2 ">
-      <div className="w-[5%] max-w-8 ">
+    <div className="h-auto flex mb-2 ">
+      <div className="w-[5%] pt-[22px] h-full max-w-8 ">
         {voted && (
           <div className="h-[50%]   flex items-end justify-end font-semibold text-sm text-rnBlack mb-0.5">
             <button
@@ -242,14 +242,14 @@ const Problems = ({ problem }) => {
           </span>
         </div>
       </div>
-      <div className="w-[95%] ml-1 bg-white flex hover:shadow-lg shadow-gray-500  rounded-md h-full px-4">
-        <div className="w-[80%] h-full flex flex-col">
-          <div className="h-[50%]    flex items-end font-semibold text-sm text-rnBlack">
+      <div className="w-[95%] ml-1 bg-white flex hover:shadow-lg shadow-gray-500  rounded-md h-auto px-4">
+        <div className="w-[80%] h-auto flex flex-col">
+          <div className="h-[41px]    flex items-end font-semibold text-sm text-rnBlack">
             <span>
               {problem.title.charAt(0).toUpperCase() + problem.title.slice(1)}
             </span>
           </div>
-          <div className="h-[50%] text-textGray  flex items-start  text-xs">
+          <div className="h-auto min-h-[41px] pb-2 pr-2 text-textGray  flex items-start  text-xs">
             {problem.description.substr(0, 160)}{" "}
             {problem.description.length > 160 ? ". . ." : ""}
           </div>

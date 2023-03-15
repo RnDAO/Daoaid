@@ -165,9 +165,9 @@ const Solutions = ({ solution }) => {
         setGlobalState("selectedSolution", solution);
         setGlobalState("comments", []);
       }}
-      className="h-[82px] flex mb-2 "
+      className="h-auto flex mb-2 "
     >
-      <div className="w-[10%] max-w-8 ">
+      <div className="w-[10%] h-full pt-[21px] max-w-8 ">
         {voted && (
           <div
             className={` h-[50%]  flex items-end justify-end font-semibold text-sm text-rnBlack mb-0.5  `}
@@ -201,13 +201,13 @@ const Solutions = ({ solution }) => {
           </span>
         </div>
       </div>
-      <div className="w-[90%] ml-1 bg-white hover:shadow-lg shadow-gray-500 flex flex-col  rounded-md h-full px-4">
-        <div className="h-[50%]   flex items-end font-semibold text-sm text-rnBlack">
+      <div className="w-[90%] h-auto ml-1 bg-white hover:shadow-lg shadow-gray-500 flex flex-col  rounded-md  px-4">
+        <div className="h-[41px]   flex items-end font-semibold text-sm text-rnBlack">
           <span>
             {solution.title.charAt(0).toUpperCase() + solution.title.slice(1)}
           </span>
         </div>
-        <div className="h-[50%] text-textGray  flex items-start  text-xs">
+        <div className="h-auto min-h-[41px] pb-2 text-textGray  flex items-start  text-xs">
           <span>
             {solution.description.substr(0, 80)}{" "}
             {solution.description.length > 80 ? ". . ." : ""}

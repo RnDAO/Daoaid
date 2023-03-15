@@ -159,8 +159,8 @@ const Problems = ({ problem }) => {
   }, [problem, userId]);
 
   return (
-    <div className="h-[82px] flex mb-2 ">
-      <div className="w-[10%] max-w-8 ">
+    <div className="h-auto flex mb-2 ">
+      <div className="w-[10%] h-full pt-[21px] max-w-8 ">
         {voted && (
           <div
             className={` h-[50%]  flex items-end justify-end font-semibold text-sm text-rnBlack mb-0.5  `}
@@ -197,14 +197,14 @@ const Problems = ({ problem }) => {
       <Link
         to="/proposal"
         onClick={() => setGlobalState("focusedProblems", [problem])}
-        className="w-[90%] ml-1 bg-white flex flex-col  rounded-md h-full px-4 hover:shadow-lg shadow-gray-500 "
+        className="w-[90%] ml-1 bg-white flex flex-col  rounded-md h-auto px-4 hover:shadow-lg shadow-gray-500 "
       >
-        <div className="h-[50%]   flex items-end font-semibold text-sm text-rnBlack">
+        <div className="h-[41px]   flex items-end font-semibold text-sm text-rnBlack">
           <span>
             {problem.title.charAt(0).toUpperCase() + problem.title.slice(1)}
           </span>
         </div>
-        <div className="h-[50%] text-textGray  flex items-start  text-xs">
+        <div className="h-auto min-h-[41px] pb-2 text-textGray  flex items-start  text-xs">
           {problem.description.substr(0, 80)}{" "}
           {problem.description.length > 80 ? ". . ." : ""}
         </div>
