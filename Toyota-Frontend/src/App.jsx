@@ -15,27 +15,10 @@ import CommentFormModal from "./components/CommentFormModal";
 import { setGlobalState, useGlobalState } from "./store";
 
 import { Toaster } from "react-hot-toast";
-import { verifyNetwork } from "./Blockchain.services";
+import { isWallectConnected, verifyNetwork } from "./Blockchain.services";
 function App() {
-  const [connectedAddress] = useGlobalState("connectedAddress");
-  // const { address, isConnecting, isDisconnected } = useAccount();
-  // console.log(isDisconnected);
-  // const [userId] = useGlobalState("userId");
-  // useEffect(() => {
-  //   if (connectedAddress) {
-  //     //check if user is already logged in
-  //     if (userId) return;
-  //     login(connectedAddress);
-  //     //setGlobalState("connectedAddress", address);
-  //   } else {
-  //     window.localStorage.removeItem("access_token");
-  //     setGlobalState("connectedAddress", "");
-  //     setGlobalState("userId", "");
-  //   }
-  // }, [connectedAddress]);
-
   useEffect(() => {
-    verifyNetwork();
+    isWallectConnected();
   }, []);
 
   return (

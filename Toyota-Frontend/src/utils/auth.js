@@ -1,5 +1,6 @@
+import { toast } from "react-hot-toast";
 import instance from "../axiosInstance";
-import { setUserId } from "../store";
+import { setGlobalState, setUserId } from "../store";
 
 //decode
 const decode = (token) => {
@@ -17,6 +18,7 @@ const decode = (token) => {
   let data = JSON.parse(jsonpayload);
 
   setUserId(data.id);
+  localStorage.setItem("user_id", data.id);
 
   // let values = {
   //   email: data.email,
@@ -73,8 +75,12 @@ const login = async (address) => {
       //console.log(res.data);
 
       localStorage.setItem("access_token", res.data.token);
+      setGlobalState("connectedAddress", address);
       decode(res.data.token);
       instance.defaults.headers["Authorization"] = "JWT " + res.data.token;
+      toast("Login successfull ", {
+        icon: "👏",
+      });
     });
   } catch (e) {
     // handle error

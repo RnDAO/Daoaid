@@ -5,19 +5,13 @@ import { useAccount } from "wagmi";
 import { connectWallet, disConnectWallet } from "../Blockchain.services";
 import { useEffect } from "react";
 import { truncate, useGlobalState } from "../store";
-import { login } from "../utils/auth";
+//import { login } from "../utils/auth";
+
 const Navbar = () => {
   // const { address, isConnecting, isDisconnected } = useAccount();
   const [connectedAddress] = useGlobalState("connectedAddress");
-  const [userId] = useGlobalState("userId");
-  useEffect(() => {
-    if (connectedAddress) {
-      //check if user is already logged in
-      if (userId) return;
-      login(connectedAddress);
-      //setGlobalState("connectedAddress", address);
-    }
-  }, [connectedAddress]);
+  //const [userId] = useGlobalState("userId");
+
   return (
     <>
       <nav className="flex  items-center justify-between px-4 fixed top-0 right-0 left-0 z-20 bg-white ">
@@ -69,7 +63,7 @@ const Navbar = () => {
             {connectedAddress && (
               <button
                 className="w-fit py-2 px-3 bg-gray-200 rounded-md font-semibold hover:bg-rnBlack hover:text-white"
-                // onClick={disConnectWallet}
+                onClick={disConnectWallet}
                 type="button"
               >
                 {truncate(connectedAddress, 4, 4, 11)}
