@@ -63,7 +63,7 @@ const Navbar = () => {
             {connectedAddress && (
               <button
                 className="w-fit py-2 px-3 bg-gray-200 rounded-md font-semibold hover:bg-rnBlack hover:text-white"
-                onClick={disConnectWallet}
+                // onClick={disConnectWallet}
                 type="button"
               >
                 {truncate(connectedAddress, 4, 4, 11)}
