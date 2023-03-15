@@ -26,5 +26,30 @@ const filterComments = (type, comments) => {
     (comment) => comment.type.toUpperCase() == type.toUpperCase()
   );
 };
+//filter comments for each title
+const getCommentsByTitle = (title, comments) => {
+  return comments.filter(
+    (comment) =>
+      comment.title.toUpperCase() == title.toUpperCase() &&
+      comment.type == "description"
+  );
+};
 
-export { getCommentsList, filterComments };
+//group description comments based on title
+const groupComments = (comments) => {
+  return comments.reduce(
+    (group, arr) => {
+      const { title } = arr;
+
+      group[title] = group[title] ?? [];
+
+      group[title].push(arr);
+
+      return group;
+    },
+
+    {}
+  );
+};
+
+export { getCommentsList, filterComments, getCommentsByTitle, groupComments };

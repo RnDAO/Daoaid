@@ -1,13 +1,12 @@
 import { useEffect, useState, useRef } from "react";
-import { truncate, useGlobalState } from "../store";
-import { filterComments } from "../utils/comments";
+import { setGlobalState, truncate, useGlobalState } from "../store";
+import { filterComments, groupComments } from "../utils/comments";
 import ReactTimeAgo from "react-time-ago";
 import { Oval } from "react-loading-icons";
 
 const ProposalInfoItems = () => {
   const [comments] = useGlobalState("comments");
   const [isLoading, setIsLoading] = useState(true);
-
   const [descriptionComments, setDescriptionComments] = useState([]);
 
   const bottomRef = useRef(null);
@@ -18,7 +17,11 @@ const ProposalInfoItems = () => {
   }, [descriptionComments]);
 
   useEffect(() => {
-    setDescriptionComments(filterComments("description", comments));
+    let tempComments = filterComments("description", comments);
+    let groupedComments = groupComments(tempComments);
+    //group the comments
+    setDescriptionComments(Object.values(groupComments(tempComments)));
+
     setIsLoading(false);
   }, [comments]);
   return (
@@ -28,8 +31,8 @@ const ProposalInfoItems = () => {
           <Oval strokeWidth={4} stroke="#bbbbbb" fill="transparent" />
         </div>
       ) : (
-        descriptionComments.map((comment, id) => (
-          <ProblemsCard comment={comment} key={id} />
+        descriptionComments.map((currTitleGrp, id) => (
+          <ProblemsCard comment={currTitleGrp[0]} key={id} />
         ))
       )}
 
@@ -42,7 +45,14 @@ export default ProposalInfoItems;
 
 const ProblemsCard = ({ comment }) => {
   return (
-    <div className=" h-auto max-h-60 w-full rounded-md bg-white p-4 mb-3">
+    <div
+      onClick={() => {
+        setGlobalState("commentModal", "scale-100");
+        setGlobalState("focusedComments", comment);
+        setGlobalState("commentType", "description");
+      }}
+      className=" cursor-pointer h-auto max-h-60 w-full rounded-md bg-white p-4 mb-3"
+    >
       <h4 className="text-sm font-semibold bg-highlight w-fit leading-6 px-2 rounded-sm">
         {comment.title}
       </h4>
