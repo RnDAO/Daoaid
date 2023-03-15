@@ -11,7 +11,7 @@ import { Oval } from "react-loading-icons";
 const ProblemsList = () => {
   const [problems] = useGlobalState("problems");
   const [connectedAddress] = useGlobalState("connectedAddress");
-  const [list, setList] = useState(problems);
+  const [sortedList, setSortedList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   // console.log(problems, list);
 
@@ -21,10 +21,19 @@ const ProblemsList = () => {
     setIsLoading(true);
   }, []);
 
+  const sortList = (list) => {
+    setIsLoading(true);
+
+    let newList = [...list].sort((a, b) => b.upvotes - a.upvotes);
+
+    setSortedList(newList);
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     //set problems in list
-    setList(problems);
-    setIsLoading(false);
+    sortList(problems);
   }, [problems]);
 
   return (
@@ -45,15 +54,21 @@ const ProblemsList = () => {
           <div className=" w-fit h-full flex items-center m-auto">
             <Oval strokeWidth={4} stroke="#ffffff" fill="transparent" />
           </div>
-        ) : list.length > 0 ? (
-          list.map((problem, id) => <Problems problem={problem} key={id} />)
+        ) : sortedList.length > 0 ? (
+          sortedList.map((problem, id) => (
+            <Problems problem={problem} key={id} />
+          ))
         ) : (
           ""
         )}
       </div>
-      <div className="h-[10%] flex justify-center items-center text-xs text-btnBlue">
+      <Link
+        to="/problems"
+        className="h-[10%] flex justify-center items-center text-xs
+        text-btnBlue"
+      >
         see all problems
-      </div>
+      </Link>
     </div>
   );
 };

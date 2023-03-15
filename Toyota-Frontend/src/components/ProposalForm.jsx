@@ -19,7 +19,7 @@ const ProposalForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleTitle = (e) => {
-    if (e.target.value.length > 40) return;
+    if (e.target.value.length > 100) return;
     setTitle(e.target.value);
     setTitleCount(e.target.value.length);
   };
@@ -101,8 +101,8 @@ const ProposalForm = () => {
       !title.trim() ||
       !description.trim() ||
       !success.trim() ||
-      budget < 1 ||
-      time < 1 ||
+      !budget.trim() ||
+      !time.trim() ||
       itemEmpty()
     )
       return;
@@ -156,7 +156,7 @@ const ProposalForm = () => {
         <div className="mt-3">
           <div className="relative mb-2">
             <span className="pointer-events-none w-8 h-8 absolute top-6 transform -translate-y-1/2 right-2 text-xs text-lowTextGray">
-              {titleCount}/40
+              {titleCount}/100
             </span>
 
             <input
@@ -166,7 +166,7 @@ const ProposalForm = () => {
               onChange={handleTitle}
               value={title}
               placeholder="Proposal name"
-              className="form-input w-full  text-xs bg-gray-200 rounded-md py-2 pl-2 pr-12 border border-grayShadeBorder focus:ring-0  focus:outline-none"
+              className="form-input w-full  text-xs bg-grayShade rounded-md py-2 pl-2 pr-12 border border-grayShadeBorder focus:ring-0  focus:outline-none"
             />
           </div>
           <div className="w-full flex items-center space-x-3 mb-2 overflow-x-auto py-1">
@@ -174,7 +174,7 @@ const ProposalForm = () => {
               <button
                 key={id}
                 type="button"
-                className=" min-w-fit bg-rnBlack px-3 py-2 text-white text-xs rounded-full "
+                className=" min-w-fit bg-bodyBg px-3 py-2 text-gray-500 font-semibold text-xs rounded-full "
               >
                 {problem.title}
               </button>
@@ -204,7 +204,7 @@ const ProposalForm = () => {
               placeholder="Description"
               onChange={handleDescription}
               value={description}
-              className="form-input w-full  text-xs bg-gray-200 rounded-md 
+              className="form-input w-full  text-xs bg-grayShade rounded-md 
               py-2 pl-2 pr-2 border border-grayShadeBorder focus:ring-0  focus:outline-none resize-none"
             ></textarea>
           </div>
@@ -223,7 +223,7 @@ const ProposalForm = () => {
                   value={success}
                   onChange={(e) => setSuccess(e.target.value)}
                   placeholder="Success"
-                  className="form-input w-full  text-sm bg-gray-200 rounded-md py-2 pl-2 pr-2 border border-grayShadeBorder focus:ring-0  focus:outline-none"
+                  className="form-input w-full  text-sm bg-grayShade rounded-md py-2 pl-2 pr-2 border border-grayShadeBorder focus:ring-0  focus:outline-none"
                 />
               </div>
               <div className=" mb-2">
@@ -232,32 +232,30 @@ const ProposalForm = () => {
                 </label>
 
                 <input
-                  type="number"
+                  type="text"
                   name="time"
                   id="time"
                   value={time}
-                  min={1}
                   onChange={(e) => setTime(e.target.value)}
                   placeholder="How log will it take?"
-                  className="form-input w-full  text-sm bg-gray-200 rounded-md py-2 pl-2 pr-2 border border-grayShadeBorder focus:ring-0  focus:outline-none"
+                  className="form-input w-full  text-sm bg-grayShade rounded-md py-2 pl-2 pr-2 border border-grayShadeBorder focus:ring-0  focus:outline-none"
                 />
               </div>
             </div>
             <div className="col-span-1">
               <div className=" mb-2">
-                <label htmlFor="success" className="text-xs text-rn">
+                <label htmlFor="budget" className="text-xs text-rn">
                   Total budget
                 </label>
 
                 <input
-                  type="number"
+                  type="text"
                   name="budget"
                   id="budget"
                   value={budget}
-                  min={1}
                   onChange={(e) => setBudget(e.target.value)}
                   placeholder="Budget"
-                  className="form-input w-full  text-sm bg-gray-200 rounded-md py-2 pl-2 pr-2 border border-grayShadeBorder focus:ring-0  focus:outline-none"
+                  className="form-input w-full  text-sm bg-grayShade rounded-md py-2 pl-2 pr-2 border border-grayShadeBorder focus:ring-0  focus:outline-none"
                 />
               </div>
 
@@ -288,7 +286,7 @@ const ProposalForm = () => {
               <button
                 type="button"
                 onClick={() => setItems([...items, {}])}
-                className=" px-3 h-10 flex items-center space-x-1 bg-gray-200 hover:bg-rnBlack hover:text-white text-textGray border border-gray-300 text-xs rounded-full "
+                className=" px-3 h-10 flex items-center space-x-1 bg-bodyBg hover:bg-rnBlack hover:ring-0 hover:border-none hover:outline-none hover:text-white text-textGray border border-gray-300 text-xs rounded-full "
               >
                 <span className="flex  h-full text-lg items-center pb-1 ">
                   +
@@ -313,7 +311,7 @@ const ProposalForm = () => {
           <button
             disabled=""
             type="button"
-            class="text-white  flex justify-center bg-btnBlue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2  inline-flex items-center"
+            class="text-white  flex justify-center bg-btnBlue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2   items-center"
           >
             <svg
               aria-hidden="true"

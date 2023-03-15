@@ -85,7 +85,7 @@ const ProblemForm = () => {
               onChange={handleTitle}
               required
               placeholder="Add a title"
-              className="form-input w-full  text-xs bg-gray-200 rounded-md py-2 pl-2 pr-12 border border-grayShadeBorder focus:ring-0  focus:outline-none"
+              className="form-input w-full  text-xs bg-grayShade rounded-md py-2 pl-2 pr-12 border border-grayShadeBorder focus:ring-0  focus:outline-none"
             />
           </div>
           <div className="relative mb-2">
@@ -101,7 +101,7 @@ const ProblemForm = () => {
               onChange={handleDescription}
               required
               placeholder="Description"
-              className="form-input w-full  text-xs bg-gray-200 rounded-md 
+              className="form-input w-full  text-xs bg-grayShade rounded-md 
               py-2 pl-2 pr-2 border border-grayShadeBorder focus:ring-0  focus:outline-none resize-none"
             ></textarea>
           </div>

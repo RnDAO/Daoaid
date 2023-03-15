@@ -6,13 +6,14 @@ import {
   setGlobalState,
   useGlobalState,
 } from "../store";
-import { getAutoProblemSearch } from "../utils/problems";
+import { getAutoProblemSearch, getProblemsList } from "../utils/problems";
 
 const ProblemSelectorModal = () => {
   const [problemSelectorModal] = useGlobalState("problemSelectorModal");
   const [autoProblemSearchResult] = useGlobalState("autoProblemSearchResult");
   const [searchValue, setSearchValue] = useState("");
   const [list, setList] = useState([]);
+  const [problems] = useGlobalState("problems");
 
   const handleSearch = async (e) => {
     setSearchValue(e.target.value);
@@ -20,8 +21,18 @@ const ProblemSelectorModal = () => {
   };
 
   useEffect(() => {
-    setList(autoProblemSearchResult);
+    if (autoProblemSearchResult.length > 0) {
+      setList(autoProblemSearchResult);
+    } else {
+      getProblemsList();
+    }
   }, [autoProblemSearchResult]);
+
+  useEffect(() => {
+    if (problems && autoProblemSearchResult.length == 0) {
+      setList(problems);
+    }
+  }, [problems]);
 
   return (
     <div
@@ -53,11 +64,11 @@ const ProblemSelectorModal = () => {
               onChange={handleSearch}
               id="search"
               placeholder="Search"
-              className="form-input w-full text-textGray text-xs bg-white rounded-full
-             py-2 pl-2 pr-8 border border-lowTextGray focus:ring-0  focus:outline-none"
+              className="form-input w-full text-xs bg-searchGray rounded-full
+             py-2 pl-2 pr-8 border border-gray-300 focus:ring-0  focus:outline-none"
             />
           </div>
-          <div className="h-[90%] overflow-y-auto ">
+          <div className="h-[90%] px-2 overflow-y-auto ">
             {list.map((problem, id) => (
               <Problems
                 problem={problem}
@@ -97,7 +108,7 @@ const Problems = ({ problem, setSearchValue }) => {
   };
 
   return (
-    <div className="h-[82px] flex my-2 " onClick={setProblems}>
+    <div className="h-[82px] flex mb-2 " onClick={setProblems}>
       {/* <div className="w-[5%] max-w-8 ">
         <div className="h-[50%]   flex items-end justify-end font-semibold text-sm text-rnBlack mb-0.5">
           <span className="bg-white rounded-sm h-fit w-6 px-1">
@@ -114,8 +125,8 @@ const Problems = ({ problem, setSearchValue }) => {
         </div>
         <div className="h-[50%] text-textGray  flex items-start  text-xs">
           <span>
-            {problem.description.substr(0, 150)}{" "}
-            {problem.description.length > 150 ? ". . ." : ""}
+            {problem.description.substr(0, 140)}{" "}
+            {problem.description.length > 140 ? ". . ." : ""}
           </span>
         </div>
       </div>

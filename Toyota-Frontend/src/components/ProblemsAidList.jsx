@@ -101,8 +101,8 @@ const ProblemsAidList = () => {
             name="search"
             id="search"
             placeholder="Search"
-            className="form-input w-full text-textGray text-xs bg-[#E6E6E6] rounded-full
-             py-2 pl-2 pr-8 border border-lowTextGray focus:ring-0  focus:outline-none"
+            className="form-input w-full  text-xs bg-searchGray rounded-full
+             py-2 pl-2 pr-8 border border-gray-300 focus:ring-0  focus:outline-none"
           />
         </form>
       </div>

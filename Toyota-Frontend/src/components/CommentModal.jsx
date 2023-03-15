@@ -97,7 +97,7 @@ const CommentModal = () => {
       </div>
 
       <h3 className="text-center text-white text-4xl font-semibold mb-3 mt-6">
-        Add another problem
+        Add Comment
       </h3>
 
       <div className=" w-full max-w-[500px] h-full max-h-[450px] rounded-lg bg-popGray p-4 m-auto">
@@ -128,7 +128,7 @@ const CommentModal = () => {
                 value={commentData}
                 rows={1}
                 placeholder="Add a comment"
-                className="form-input w-full  text-xs bg-gray-200 rounded-md 
+                className="form-input w-full  text-xs bg-grayShade rounded-md 
               py-2 pl-2 pr-12 border border-grayShadeBorder focus:ring-0  focus:outline-none resize-none"
               ></textarea>
               {!isSubmitting && (
@@ -144,7 +144,7 @@ const CommentModal = () => {
                 <button
                   disabled=""
                   type="button"
-                  class="text-white w-full flex justify-center bg-btnBlue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2  inline-flex items-center"
+                  class="text-white w-full  justify-center bg-btnBlue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2  inline-flex items-center"
                 >
                   <svg
                     aria-hidden="true"

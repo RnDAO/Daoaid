@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bodyBg: "#DDDDDD",
+        bodyBg: "#F7F7F7",
         rnBlack: "#1E1E3C",
         btnBlack: "#484848",
         btnBlue: "#2765C2",
@@ -19,6 +19,7 @@ module.exports = {
         grayShade: "#FBFBFB",
         highlight: "#F8EED5",
         popGray: "#F7F7F7",
+        searchGray: "#F9F9F9",
       },
     },
   },

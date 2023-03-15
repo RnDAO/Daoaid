@@ -11,8 +11,9 @@ import { Oval } from "react-loading-icons";
 const SolutionsList = () => {
   const [solutions] = useGlobalState("solutions");
   const [connectedAddress] = useGlobalState("connectedAddress");
-  const [list, setList] = useState(solutions);
+
   const [isLoading, setIsLoading] = useState(true);
+  const [sortedList, setSortedList] = useState([]);
 
   useEffect(() => {
     //get solutions
@@ -20,10 +21,19 @@ const SolutionsList = () => {
     setIsLoading(true);
   }, []);
 
+  const sortList = (list) => {
+    setIsLoading(true);
+
+    let newList = [...list].sort((a, b) => b.upvotes - a.upvotes);
+
+    setSortedList(newList);
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     //set set solutions in list
-    setList(solutions);
-    setIsLoading(false);
+    sortList(solutions);
   }, [solutions]);
   return (
     <div className="col-span-1 h-full overflow-auto ">
@@ -43,15 +53,20 @@ const SolutionsList = () => {
           <div className=" w-fit h-full flex items-center m-auto">
             <Oval strokeWidth={4} stroke="#ffffff" fill="transparent" />
           </div>
-        ) : list.length > 0 ? (
-          list.map((solution, id) => <Solutions solution={solution} key={id} />)
+        ) : sortedList.length > 0 ? (
+          sortedList.map((solution, id) => (
+            <Solutions solution={solution} key={id} />
+          ))
         ) : (
           ""
         )}
       </div>
-      <div className="h-[10%] flex justify-center items-center text-xs text-btnBlue">
+      <Link
+        to="/solutions"
+        className="h-[10%] flex justify-center items-center text-xs text-btnBlue"
+      >
         see all solutions
-      </div>
+      </Link>
     </div>
   );
 };
