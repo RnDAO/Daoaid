@@ -24,7 +24,7 @@ const ProposalForm = () => {
     setTitleCount(e.target.value.length);
   };
   const handleDescription = (e) => {
-    if (e.target.value.length > 300) return;
+    if (e.target.value.length > 2500) return;
     setDescription(e.target.value);
     setDescriptionCount(e.target.value.length);
   };
@@ -118,6 +118,7 @@ const ProposalForm = () => {
       itemsNeeded: items,
       problemsSolved: problems,
     };
+    console.log(data);
 
     try {
       await instance({
@@ -194,7 +195,7 @@ const ProposalForm = () => {
 
           <div className="relative mb-2">
             <span className="pointer-events-none w-8 h-8 absolute -bottom-4 transform -translate-y-1/2 right-6 text-xs text-lowTextGray tracking-widest">
-              {descriptionCount}/300
+              {descriptionCount}/2500
             </span>
 
             <textarea
@@ -268,17 +269,16 @@ const ProposalForm = () => {
                       value={item.name || ""}
                       onChange={(e) => updateItemName(e, id)}
                       placeholder="Item name"
-                      className="form-input w-full  text-sm bg-gray-200 rounded-md py-2 pl-2 pr-2 border border-grayShadeBorder focus:ring-0  focus:outline-none"
+                      className="form-input w-full  text-sm bg-grayShade rounded-md py-2 pl-2 pr-2 border border-grayShadeBorder focus:ring-0  focus:outline-none"
                     />
                   </div>
                   <div className=" mb-2 ">
                     <input
-                      type="number"
-                      min={1}
+                      type="text"
                       value={item.price || ""}
                       onChange={(e) => updateItemPrice(e, id)}
                       placeholder="Cost"
-                      className="form-input w-full  text-sm bg-gray-200 rounded-md py-2 pl-2 pr-2 border border-grayShadeBorder focus:ring-0  focus:outline-none"
+                      className="form-input w-full  text-sm bg-grayShade rounded-md py-2 pl-2 pr-2 border border-grayShadeBorder focus:ring-0  focus:outline-none"
                     />
                   </div>
                 </div>

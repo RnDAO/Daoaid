@@ -39,7 +39,6 @@ instance.interceptors.response.use(
   },
   function (error) {
     const originalRequest = error.config;
-    console.log(originalRequest);
 
     if (error.response.status === 401) {
       //session expired, login if wallet address is present

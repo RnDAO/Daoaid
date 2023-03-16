@@ -22,17 +22,17 @@ const solutionSchema = new mongoose.Schema(
       required: true,
     },
     totalBudget: {
-      type: Number,
+      type: String,
       required: true,
     },
     timeFrame: {
-      type: Number,
+      type: String,
       required: true,
     },
     itemsNeeded: [
       {
         name: { type: String, required: [true, "item must have a name"] },
-        price: { type: Number, required: [true, "item must have a price"] },
+        price: { type: String, required: [true, "item must have a price"] },
         // quantity: { type: number, required: [true, "item must have quantity"] },
       },
     ],

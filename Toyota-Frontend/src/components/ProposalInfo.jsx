@@ -180,7 +180,7 @@ const ProposalInfo = () => {
               Total budget
             </h4>
             <h4 className="text-rnBlack w-[50%]  text-md font-semibold">
-              {detail.totalBudget} eth
+              {detail.totalBudget}
             </h4>
           </div>
           <div className="flex space-x-1 w-[50%]  justify-end">
@@ -217,7 +217,7 @@ const ProposalInfo = () => {
                   {item.name}
                 </small>
                 <small className="text-rnBlack text-sm w-[50%] pl-5">
-                  {item.price} eth
+                  {item.price}
                 </small>
               </div>
             ))
