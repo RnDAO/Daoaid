@@ -76,4 +76,4 @@ const login = async (address) => {
   }
 };
 
-export { login, register };
+export { login };
