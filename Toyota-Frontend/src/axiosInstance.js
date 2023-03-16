@@ -1,4 +1,7 @@
 import axios from "axios";
+import { toast } from "react-hot-toast";
+import { connectWallet } from "./Blockchain.services";
+import { setGlobalState } from "./store";
 //console.log(import.meta.env);
 const instance = axios.create({
   baseURL:
@@ -13,9 +16,10 @@ const instance = axios.create({
   // .. other options
 });
 
-axios.interceptors.request.use(
+instance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("access_token");
+
     if (token) {
       config.headers["Authorization"] = "JWT " + token;
       config.headers["Content-Type"] = "application/json";
@@ -35,6 +39,16 @@ instance.interceptors.response.use(
   },
   function (error) {
     const originalRequest = error.config;
+    console.log(originalRequest);
+
+    if (error.response.status === 401) {
+      //session expired, login if wallet address is present
+      toast.error("Session expired, please connect wallet");
+      localStorage.setItem("user_id", "");
+      localStorage.setItem("access_token", "");
+      setGlobalState("connectedAddress", "");
+      connectWallet();
+    }
 
     // if (
     //   (error.response.status === 401 || error.response.status === 400) &&

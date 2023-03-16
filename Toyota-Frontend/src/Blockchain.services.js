@@ -70,7 +70,7 @@ export const connectWallet = async () => {
     return;
   }
   try {
-    if (!ethereum) return alert("Please install Metamask");
+    if (!ethereum) toast.error("Please install Metamask");
     const accounts = await ethereum.request({
       method: "eth_requestAccounts",
     });
