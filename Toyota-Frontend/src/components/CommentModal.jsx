@@ -23,6 +23,7 @@ const CommentModal = () => {
   const bottomRef = useRef(null);
 
   useEffect(() => {
+    // focused comment for description type of comment is object while others is an array
     if (commentType != "description") {
       setViewComments(focusedComments);
     }
@@ -36,10 +37,12 @@ const CommentModal = () => {
       focusedComments &&
       commentType == "description"
     ) {
+      //focused comment is an object
       setCommentTitle(focusedComments.title);
 
+      //group comments with same title
       setViewComments(getCommentsByTitle(focusedComments.title, comments));
-
+      //set loading false
       setIsLoading(false);
     }
   }, [comments, focusedComments]);
@@ -50,6 +53,7 @@ const CommentModal = () => {
   }, [viewComments]);
 
   useEffect(() => {
+    //set comment title based on type with exception to description comments
     if (commentType == "successMeasure") {
       setCommentTitle("What does success look like");
     }
@@ -61,16 +65,20 @@ const CommentModal = () => {
     }
   }, [commentType]);
 
+  //reset form
   const resetForm = () => {
     setCommentData("");
   };
 
+  //submit comment
   const postComment = async (e) => {
     e.preventDefault();
+    //check if wallet is connected
     if (!connectedAddress) {
       toast.error("Please connect a wallet.");
       return;
     }
+    //verify inputs
     if (!commentData || !commentTitle) return;
     setIsSubmitting(true);
 
@@ -87,7 +95,6 @@ const CommentModal = () => {
         data: data,
       }).then((res) => {
         // handle success
-
         getCommentsList(selectedSolution._id);
         resetForm();
         setIsSubmitting(false);

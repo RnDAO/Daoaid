@@ -6,11 +6,7 @@ import {
   setProblemSearchResult,
   useGlobalState,
 } from "../store";
-import {
-  getProblemSearch,
-  getProblemsList,
-  getSingleProblem,
-} from "../utils/problems";
+import { getProblemSearch, getProblemsList } from "../utils/problems";
 import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import instance from "../axiosInstance";
@@ -20,7 +16,7 @@ import { Oval } from "react-loading-icons";
 const ProblemsAidList = () => {
   const [problems] = useGlobalState("problems");
   const [problemSearchResult] = useGlobalState("problemSearchResult");
-  const [connectedAddress] = useGlobalState("connectedAddress");
+
   const [list, setList] = useState(problems);
   const [sortedList, setSortedList] = useState([]);
   const [sortPattern, setSortPattern] = useState("votes");
@@ -31,10 +27,12 @@ const ProblemsAidList = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    //sort problems based on votes
     if (sortPattern == "votes") {
       let newList = [...list].sort((a, b) => b.upvotes - a.upvotes);
 
       setSortedList(newList);
+      //sort problems based on date
     } else if (sortPattern == "date") {
       let newList = [...list].sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -109,7 +107,7 @@ const ProblemsAidList = () => {
       <div className="h-[90%] px-2 overflow-y-auto ">
         {isLoading ? (
           <div className=" w-fit h-full flex items-center m-auto">
-            <Oval strokeWidth={4} stroke="#ffffff" fill="transparent" />
+            <Oval strokeWidth={4} stroke="#000000" fill="transparent" />
           </div>
         ) : sortedList.length > 0 ? (
           sortedList.map((problem, id) => (

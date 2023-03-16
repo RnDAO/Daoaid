@@ -5,8 +5,11 @@ import { setGlobalState } from "../store";
 const Description = ({ detail, descriptionComments }) => {
   const [searchTitles, setSearchTitles] = useState([]);
   const [mainDetail, setMainDetail] = useState(detail);
+
   const write = () => {
+    //get highlighted text
     let text = window.getSelection().toString();
+    //check text and open comment form
     if (text.length > 0) {
       setGlobalState("commentFormModal", "scale-100");
       setGlobalState("commentType", "description");

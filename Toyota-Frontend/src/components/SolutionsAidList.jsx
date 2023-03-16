@@ -24,12 +24,15 @@ const SolutionsAidList = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get("search");
 
+  //sort list
   useEffect(() => {
     setIsLoading(true);
+    //sort based on votes
     if (sortPattern == "votes") {
       let newList = [...list].sort((a, b) => b.upvotes - a.upvotes);
 
       setSortedList(newList);
+      //sort based on date
     } else if (sortPattern == "date") {
       let newList = [...list].sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -112,7 +115,7 @@ const SolutionsAidList = () => {
             .map((solution, id) => <Solutions solution={solution} key={id} />)} */}
         {isLoading ? (
           <div className=" w-fit h-full flex items-center m-auto">
-            <Oval strokeWidth={4} stroke="#ffffff" fill="transparent" />
+            <Oval strokeWidth={4} stroke="#000000" fill="transparent" />
           </div>
         ) : sortedList.length > 0 ? (
           sortedList.map((solution, id) => (

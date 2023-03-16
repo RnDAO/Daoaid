@@ -18,10 +18,13 @@ const CommentFormModal = () => {
 
   useEffect(() => {
     if (highlightedTitle.length > 0) {
+      //set title based on highlighted section
       setCommentTitle(highlightedTitle);
     }
   }, [highlightedTitle]);
+
   useEffect(() => {
+    //set comment titles based on type but with exception to description comment
     if (commentType == "description") {
       setCommentTitle(highlightedTitle);
     } else if (commentType == "successMeasure") {
@@ -36,25 +39,31 @@ const CommentFormModal = () => {
   }, [commentType]);
 
   const resetForm = () => {
+    //empty form
     setCommentTitle("");
     setCommentData("");
     setGlobalState("commentFormModal", "scale-0");
   };
+
   const postComment = async (e) => {
+    //post comment submitted
     e.preventDefault();
+    //check if wallet is connected
     if (!connectedAddress) {
       toast.error("Please connect a wallet.");
       return;
     }
+
+    //check form inputs
     if (!commentData || !commentTitle) return;
 
+    //set loading
     setIsSubmitting(true);
+
     let data = {
       type: commentType,
       title: commentTitle,
       comment: commentData,
-
-      // title: commentTitle,
     };
 
     try {
@@ -64,9 +73,10 @@ const CommentFormModal = () => {
         data: data,
       }).then((res) => {
         // handle success
-        // console.log(res);
         getCommentsList(selectedSolution._id);
+        //empty form
         resetForm();
+        //off loading
         setIsSubmitting(false);
       });
     } catch (e) {

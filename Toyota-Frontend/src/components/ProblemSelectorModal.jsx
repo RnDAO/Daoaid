@@ -108,7 +108,7 @@ const Problems = ({ problem, setSearchValue }) => {
   };
 
   return (
-    <div className="h-[82px] flex mb-2 " onClick={setProblems}>
+    <div className="h-auto flex mb-2 " onClick={setProblems}>
       {/* <div className="w-[5%] max-w-8 ">
         <div className="h-[50%]   flex items-end justify-end font-semibold text-sm text-rnBlack mb-0.5">
           <span className="bg-white rounded-sm h-fit w-6 px-1">
@@ -119,11 +119,11 @@ const Problems = ({ problem, setSearchValue }) => {
           <span className="rounded-sm h-fit w-6 px-1 bg-white text-xs">24</span>
         </div>
       </div> */}
-      <div className="w-full ml-1 bg-white hover:shadow-lg shadow-gray-500  cursor-pointer flex flex-col  rounded-md h-full px-4">
-        <div className="h-[50%]   flex items-end font-semibold text-sm text-rnBlack">
+      <div className="w-full ml-1 bg-white hover:shadow-lg shadow-gray-500  cursor-pointer flex flex-col  rounded-md h-auto px-4">
+        <div className="h-[41px]   flex items-end font-semibold text-sm text-rnBlack">
           <span>{problem.title}</span>
         </div>
-        <div className="h-[50%] text-textGray  flex items-start  text-xs">
+        <div className="h-auto min-h-[41px] pb-2 text-textGray  flex items-start  text-xs">
           <span>
             {problem.description.substr(0, 140)}{" "}
             {problem.description.length > 140 ? ". . ." : ""}

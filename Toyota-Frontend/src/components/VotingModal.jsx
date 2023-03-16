@@ -1,5 +1,3 @@
-import { AiOutlineSearch } from "react-icons/ai";
-import { IoIosArrowUp } from "react-icons/io";
 import { setGlobalState, useGlobalState } from "../store";
 
 const VotingModal = () => {

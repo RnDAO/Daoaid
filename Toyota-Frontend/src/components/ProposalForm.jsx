@@ -18,11 +18,14 @@ const ProposalForm = () => {
   const [problems, setProblems] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  //verify length of title
   const handleTitle = (e) => {
     if (e.target.value.length > 100) return;
     setTitle(e.target.value);
     setTitleCount(e.target.value.length);
   };
+
+  //verify length of description
   const handleDescription = (e) => {
     if (e.target.value.length > 2500) return;
     setDescription(e.target.value);
@@ -31,15 +34,15 @@ const ProposalForm = () => {
 
   //update name in matching items list
   const updateItemName = (e, id) => {
-    // 👇️ passing function to setData method
+    //  passing function to setItems method
     setItems((prevState) => {
       const newState = prevState.map((obj, index) => {
-        // 👇️ if id equals 2, update country property
+        // if id equals current index, update name property
         if (id === index) {
           return { ...obj, name: e.target.value };
         }
 
-        // 👇️ otherwise return the object as is
+        //  otherwise return the object as is
         return obj;
       });
 
@@ -49,15 +52,15 @@ const ProposalForm = () => {
 
   //update price in matching items list
   const updateItemPrice = (e, id) => {
-    // 👇️ passing function to setData method
+    //  passing function to setItems method
     setItems((prevState) => {
       const newState = prevState.map((obj, index) => {
-        // 👇️ if id equals 2, update country property
+        //  if id equals current index, update price property
         if (id === index) {
           return { ...obj, price: e.target.value };
         }
 
-        // 👇️ otherwise return the object as is
+        //  otherwise return the object as is
         return obj;
       });
 
@@ -65,6 +68,8 @@ const ProposalForm = () => {
     });
   };
 
+
+  //reset form
   const resetForm = () => {
     setTitle("");
     setTime("");
@@ -93,10 +98,14 @@ const ProposalForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submited...");
+
+    //check if wallet is connected
     if (!connectedAddress) {
       toast.error("Please connect a wallet.");
       return;
     }
+
+    //verify all inputs
     if (
       !title.trim() ||
       !description.trim() ||
@@ -118,11 +127,11 @@ const ProposalForm = () => {
       itemsNeeded: items,
       problemsSolved: problems,
     };
-    console.log(data);
+
 
     try {
       await instance({
-        // url of the api endpoint (can be changed)
+        
         url: "solutions/",
         method: "POST",
         data: data,
@@ -130,8 +139,10 @@ const ProposalForm = () => {
         // handle success
         toast.success("Proposal recorded.");
         resetForm();
+        //get list
         getSolutionsList();
         setIsSubmitting(false);
+        //empty focused problems array
         setGlobalState("focusedProblems", []);
         setProblems([]);
       });

@@ -18,7 +18,6 @@ const ProposalInfoItems = () => {
 
   useEffect(() => {
     let tempComments = filterComments("description", comments);
-    let groupedComments = groupComments(tempComments);
     //group the comments
     setDescriptionComments(Object.values(groupComments(tempComments)));
 
@@ -28,7 +27,7 @@ const ProposalInfoItems = () => {
     <div className="col-span-1 overflow-y-auto">
       {isLoading ? (
         <div className=" w-fit h-full flex items-center m-auto">
-          <Oval strokeWidth={4} stroke="#bbbbbb" fill="transparent" />
+          <Oval strokeWidth={4} stroke="#000000" fill="transparent" />
         </div>
       ) : (
         descriptionComments.map((currTitleGrp, id) => (

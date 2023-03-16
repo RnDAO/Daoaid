@@ -13,16 +13,19 @@ const ProblemForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleTitle = (e) => {
+    //check length of title string
     if (e.target.value.length > 40) return;
     setTitle(e.target.value);
     setTitleCount(e.target.value.length);
   };
   const handleDescription = (e) => {
+    //check length of description string
     if (e.target.value.length > 300) return;
     setDescription(e.target.value);
     setDescriptionCount(e.target.value.length);
   };
 
+  //ereset form
   const resetForm = () => {
     setDescription("");
     setTitle("");
@@ -32,6 +35,8 @@ const ProblemForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    //ensure user is logged in
     if (!connectedAddress) {
       toast.error("Please connect a wallet.");
       return;
@@ -47,13 +52,12 @@ const ProblemForm = () => {
 
     try {
       await instance({
-        // url of the api endpoint (can be changed)
         url: "problems/",
         method: "POST",
         data: data,
       }).then((res) => {
         // handle success
-        console.log(res);
+
         toast.success("Problem recorded.");
         resetForm();
         getProblemsList();

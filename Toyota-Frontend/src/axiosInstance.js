@@ -42,7 +42,7 @@ instance.interceptors.response.use(
 
     if (error.response.status === 401) {
       //session expired, login if wallet address is present
-      toast.error("Session expired, please connect wallet");
+      toast.error("Session expired. Authenticating");
       localStorage.setItem("user_id", "");
       localStorage.setItem("access_token", "");
       setGlobalState("connectedAddress", "");

@@ -21,6 +21,7 @@ const ProblemsList = () => {
     setIsLoading(true);
   }, []);
 
+  //sort problems based on votes
   const sortList = (list) => {
     setIsLoading(true);
 
@@ -52,7 +53,7 @@ const ProblemsList = () => {
       <div className="h-[80%] px-2 overflow-y-auto ">
         {isLoading ? (
           <div className=" w-fit h-full flex items-center m-auto">
-            <Oval strokeWidth={4} stroke="#ffffff" fill="transparent" />
+            <Oval strokeWidth={4} stroke="#000000" fill="transparent" />
           </div>
         ) : sortedList.length > 0 ? (
           sortedList.map((problem, id) => (

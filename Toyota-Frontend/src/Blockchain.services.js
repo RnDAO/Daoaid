@@ -103,6 +103,7 @@ export const isWallectConnected = async () => {
 
     if (accounts.length) {
       setGlobalState("connectedAddress", accounts[0].toLowerCase());
+      //get user id from local storage
       setUserId(localStorage.getItem("user_id"));
     } else {
       localStorage.setItem("user_id", "");

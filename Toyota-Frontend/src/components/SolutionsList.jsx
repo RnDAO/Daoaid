@@ -10,8 +10,6 @@ import { Oval } from "react-loading-icons";
 
 const SolutionsList = () => {
   const [solutions] = useGlobalState("solutions");
-  const [connectedAddress] = useGlobalState("connectedAddress");
-
   const [isLoading, setIsLoading] = useState(true);
   const [sortedList, setSortedList] = useState([]);
 
@@ -21,6 +19,7 @@ const SolutionsList = () => {
     setIsLoading(true);
   }, []);
 
+  //sort list based on votes
   const sortList = (list) => {
     setIsLoading(true);
 
@@ -51,7 +50,7 @@ const SolutionsList = () => {
       <div className="h-[80%] px-2 overflow-y-auto ">
         {isLoading ? (
           <div className=" w-fit h-full flex items-center m-auto">
-            <Oval strokeWidth={4} stroke="#ffffff" fill="transparent" />
+            <Oval strokeWidth={4} stroke="#000000" fill="transparent" />
           </div>
         ) : sortedList.length > 0 ? (
           sortedList.map((solution, id) => (

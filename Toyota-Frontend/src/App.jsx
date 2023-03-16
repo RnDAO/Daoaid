@@ -9,13 +9,10 @@ import ProblemSelectorModal from "./components/ProblemSelectorModal";
 import CommentModal from "./components/CommentModal";
 import VotingModal from "./components/VotingModal";
 import { useEffect } from "react";
-import { useAccount } from "wagmi";
-import { login, register } from "./utils/auth";
 import CommentFormModal from "./components/CommentFormModal";
-import { setGlobalState, useGlobalState } from "./store";
 
 import { Toaster } from "react-hot-toast";
-import { isWallectConnected, verifyNetwork } from "./Blockchain.services";
+import { isWallectConnected } from "./Blockchain.services";
 function App() {
   useEffect(() => {
     isWallectConnected();

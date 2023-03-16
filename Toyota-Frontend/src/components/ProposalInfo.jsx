@@ -15,7 +15,7 @@ const ProposalInfo = () => {
   const [detail, setDetail] = useState({});
   const [userView, setUserView] = useState();
   const { id } = useParams();
-  //console.log(detail.itemsNeeded);
+  //get a solution
   useEffect(() => {
     if (Object.keys(selectedSolution).length == 0) {
       getSingleSolution(id);
@@ -26,6 +26,7 @@ const ProposalInfo = () => {
     }
   }, [selectedSolution]);
 
+  //filter comments based on type
   useEffect(() => {
     setBudgetComments(filterComments("totalBudget", comments));
     setSuccessComments(filterComments("successMeasure", comments));
