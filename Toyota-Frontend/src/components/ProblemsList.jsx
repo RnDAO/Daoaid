@@ -206,8 +206,9 @@ const Problems = ({ problem }) => {
           </span>
         </div>
         <div className="h-auto min-h-[41px] pb-2 text-textGray  flex items-start  text-xs">
-          {problem.description.substr(0, 80)}{" "}
-          {problem.description.length > 80 ? ". . ." : ""}
+          {problem.description.substr(0, 100)}{" "}
+          {problem.description.length > 100 ? ". . ." : ""}
+          {}
         </div>
       </Link>
     </div>

@@ -72,8 +72,9 @@ const ProblemForm = () => {
   };
 
   return (
-    <div className="col-span-1 h-full overflow-auto ">
-      <div className=" bg-white rounded-md h-auto mt-12 py-4 px-3">
+    <div className="col-span-1 h-full overflow-auto   ">
+      <div className="h-[10%]"></div>
+      <div className=" bg-white rounded-md h-auto  py-4 px-3">
         <h3 className="text-md text-rnBlack font-bold">Add a problem</h3>
         <form onSubmit={handleSubmit} className=" mt-4">
           <div className="relative mb-4">

@@ -9,14 +9,15 @@ const ProposalInfoItems = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [descriptionComments, setDescriptionComments] = useState([]);
 
-  const bottomRef = useRef(null);
+  //const bottomRef = useRef(null);
+
+  // useEffect(() => {
+  //   // 👇️ scroll to bottom every time messages change
+  //   bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  // }, [descriptionComments]);
 
   useEffect(() => {
-    // 👇️ scroll to bottom every time messages change
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [descriptionComments]);
-
-  useEffect(() => {
+    setIsLoading(true);
     let tempComments = filterComments("description", comments);
     //group the comments
     setDescriptionComments(Object.values(groupComments(tempComments)));
@@ -35,7 +36,7 @@ const ProposalInfoItems = () => {
         ))
       )}
 
-      <div ref={bottomRef} />
+      {/* <div ref={bottomRef} /> */}
     </div>
   );
 };

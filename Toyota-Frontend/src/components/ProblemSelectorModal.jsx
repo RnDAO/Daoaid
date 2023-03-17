@@ -125,8 +125,9 @@ const Problems = ({ problem, setSearchValue }) => {
         </div>
         <div className="h-auto min-h-[41px] pb-2 text-textGray  flex items-start  text-xs">
           <span>
-            {problem.description.substr(0, 140)}{" "}
-            {problem.description.length > 140 ? ". . ." : ""}
+            {/* {problem.description.substr(0, 140)}{" "}
+            {problem.description.length > 140 ? ". . ." : ""} */}
+            {problem.description}
           </span>
         </div>
       </div>

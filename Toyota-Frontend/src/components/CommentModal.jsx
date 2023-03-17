@@ -31,10 +31,10 @@ const CommentModal = () => {
   }, [focusedComments]);
 
   useEffect(() => {
-    //get comments where title is selectedcomment title
+    //get comments where title is selected comment title
     if (
       comments.length > 0 &&
-      focusedComments &&
+      Object.keys(focusedComments).length > 0 &&
       commentType == "description"
     ) {
       //focused comment is an object
@@ -144,7 +144,7 @@ const CommentModal = () => {
             <div ref={bottomRef} />
           </div>
 
-          <div className="h-[20%] pr-2 pt-4">
+          <div className="h-[20%] pr-2 pt-2">
             <form onSubmit={postComment} className=" h-full">
               <textarea
                 name="comment"

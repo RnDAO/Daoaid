@@ -15,6 +15,9 @@ const ProblemItems = () => {
 
   return (
     <div className="col-span-1 overflow-y-auto">
+      <h3 className="font-bold text-2xl py-2">
+        Problem{problems.length > 1 ? "s" : ""}
+      </h3>
       {problems.map((problem, id) => (
         <ProblemsCard key={id} problem={problem} />
       ))}

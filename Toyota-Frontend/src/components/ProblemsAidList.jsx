@@ -248,8 +248,9 @@ const Problems = ({ problem }) => {
             </span>
           </div>
           <div className="h-auto min-h-[41px] pb-2 pr-2 text-textGray  flex items-start  text-xs">
-            {problem.description.substr(0, 160)}{" "}
-            {problem.description.length > 160 ? ". . ." : ""}
+            {/* {problem.description.substr(0, 160)}{" "}
+            {problem.description.length > 160 ? ". . ." : ""} */}
+            {problem.description}
           </div>
         </div>
         <div className="w-[20%] h-full flex items-center justify-center ">

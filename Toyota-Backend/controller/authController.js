@@ -44,15 +44,19 @@ const verifyToken = catchAsync(async (req, res, next) => {
     return next(new AppError("Please provide jwt token", 401));
   }
 
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  const user = await User.findById(decoded.id);
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
 
-  if (user) {
+    if (!user) {
+      return next(new AppError("User not found", 401));
+    }
+
     req.user = user;
+    next();
+  } catch (err) {
+    return next(new AppError("Invalid token", 401));
   }
-
-  req.user = user;
-  next();
 });
 
 module.exports = {

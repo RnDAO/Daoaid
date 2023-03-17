@@ -208,8 +208,8 @@ const Solutions = ({ solution }) => {
         </div>
         <div className="h-auto min-h-[41px] pb-2 text-textGray  flex items-start  text-xs">
           <span>
-            {solution.description.substr(0, 80)}{" "}
-            {solution.description.length > 80 ? ". . ." : ""}
+            {solution.description.substr(0, 100)}{" "}
+            {solution.description.length > 100 ? ". . ." : ""}
           </span>
         </div>
       </div>

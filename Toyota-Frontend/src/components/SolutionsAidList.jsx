@@ -265,8 +265,9 @@ const Solutions = ({ solution }) => {
             </span>
           </div>
           <div className="h-auto min-h-[41px] pb-2 pr-2 text-textGray  flex items-start  text-xs">
-            {solution.description.substr(0, 260)}{" "}
-            {solution.description.length > 260 ? ". . ." : ""}
+            {solution.description.substr(0, 300)}{" "}
+            {solution.description.length > 300 ? ". . ." : ""}
+            {}
           </div>
         </div>
         <div className="w-[20%] h-[100px] flex  items-center justify-center ">
