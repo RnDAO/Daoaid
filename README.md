@@ -44,9 +44,7 @@ How do we allow other members to constructively contribute to ideas that have be
 
 **RnDAO Solution - Toyota IDEA HQ:**
 
-To solve the above mentioned problems, we created the Toyota IDEA HQ. IDEA HQ is a web product built on the MERN stack that uses Astar wallet IDs as user identifiers. The goal of IDEA HQ is to surface the most critical problems that Toyota employees see within the organisation, and allow them to collectively come up with solutions to these problems. All of it is done in a decentralised way, without the need for managers to interfere. 
-
-Core to the Toyota model is the insight that employees on the shop floor - those closest to the real work - can see problems better and faster (Jidoka).  IDEA HQ builds on that insight by helping Toyota employees surface the problems they know are critical, and allowing other employees to craft solutions. Separating problems from solutions means all of it is done in a decentralised way, without the need for managers to interfere. 
+To solve the above mentioned problems, we created the Toyota IDEA HQ. IDEA HQ is a web product built on the MERN stack that uses Astar wallet IDs as user identifiers. The goal of IDEA HQ is to surface the most critical problems that Toyota employees see within the organisation, and allow them to collectively come up with solutions to these problems. Core to the Toyota model is the insight that employees on the shop floor - those closest to the real work - can see problems better and faster (Jidoka). Separating problems from solutions means all of it is done in a decentralised way, without the need for managers to interfere. 
 
 More concretely Toyota IDEA HQ allows the following:
 
