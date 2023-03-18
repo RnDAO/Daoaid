@@ -44,7 +44,7 @@ How do we allow other members to constructively contribute to ideas that have be
 
 **RnDAO Solution - Toyota IDEA HQ:**
 
-To solve the above mentioned problems, we created the Toyota IDEA HQ. IDEA HQ is a web product built on the MERN stack that uses Astar wallet IDs as user identifiers. The goal of IDEA HQ is to surface the most critical problems that Toyota employees see within the organisation, and allow them to collectively come up with solutions to these problems. Core to the Toyota model is the insight that employees on the shop floor - those closest to the real work - can see problems better and faster (Jidoka). Separating problems from solutions means all of it is done in a decentralised way, without the need for managers to interfere. 
+To solve the above mentioned problems, we created the Toyota IDEA HQ. IDEA HQ is a web product built on the MERN stack that uses Astar wallet IDs as user identifiers (non-custodial for POC, next version will be custodial with account abstraction). The goal of IDEA HQ is to surface the most critical problems that Toyota employees see within the organisation, and allow them to collectively come up with solutions to these problems. Core to the Toyota model is the insight that employees on the shop floor - those closest to the real work - can see problems better and faster (Jidoka). Separating problems from solutions means all of it is done in a decentralised way, without the need for managers to interfere. 
 
 More concretely Toyota IDEA HQ allows the following:
 
@@ -56,7 +56,7 @@ More concretely Toyota IDEA HQ allows the following:
 
 The most upvoted solutions can then be brought to the relevant Toyota committees that can fund and staff relevant teams to execute the ideas, pulling from the pool of people who have upvoted the problem. This part is out of scope of this proposal
 
-Because employees login with their Astar wallets, contributions to Toyota IDEA HQ are mapped to their wallet address, and at a later point can be minted as contribution badges that employees can use to show their skills and level of participation. This part is out of scope of this proposal, but will be implemented as a next step.
+Because Toyota employees log in with their Astar wallets, contributions to Toyota IDEA HQ are mapped to their wallet address, and at a later point can be minted as contribution badges that employees can use to show their skills and level of participation. This part is out of scope of this proposal, but will be implemented as a next step.
 
 <br/><br/>
 
