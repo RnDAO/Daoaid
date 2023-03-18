@@ -27,7 +27,7 @@ The solution context was set by Toyota as follows:
 
 RnDAO is a DAO focused on researching and building DAO tooling. Our members have worked in the DAO space for years and have contributed and built some of the most important tools in the space. The team for this Hackathon was comprised of
 
-* Wutwut: Product Manager - Ex Google/BGC, 2x Founder
+* Wutwut: web3 Freelance Product Manager - Ex Google/BGC, 2x Founder
 * William: Full-stack Blockchain Developer
 * Adebola: Full-stack Blockchain Developer and member of Gitcoin’s FDD unit
 * Nikku: Full-stack Blockchain Developer
