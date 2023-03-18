@@ -58,7 +58,7 @@ More concretely Toyota IDEA HQ allows the following:
 
 The most upvoted solutions can then be brought to the relevant Toyota committees that can fund and staff relevant teams to execute the ideas, pulling from the pool of people who have upvoted the problem. This part is out of scope of this proposal
 
-Because employees login with their Astar wallets, contributions to Toyota IDEA HQ are mapped to their wallet address, and at a later point can be minted as contribution badges that employees can use to show their skills and level of participation. This part is out of scope of this proposal
+Because employees login with their Astar wallets, contributions to Toyota IDEA HQ are mapped to their wallet address, and at a later point can be minted as contribution badges that employees can use to show their skills and level of participation. This part is out of scope of this proposal, but will be implemented as a next step.
 
 <br/><br/>
 
@@ -78,36 +78,40 @@ Toyota IDEA HQ has the following benefits
 The following section will guide you through all the relevant screens of Toyota IDEA HQ from the perspective of a Toyota employee called Kenzo.
 <br/><br/>
 **Login:**
-Kenzo logs in with his Astar compatible wallet. His address was whitelisted from the Toyota main office and has access to IDEA HQ.
+Ken logs in with his Astar compatible wallet. His address was whitelisted from the Toyota main office and has access to IDEA HQ.
 
 **Home:**
-Kenzo explores the highest trending problems and solutions that his team members across Toyota are surfacing. He can decide to upvote problems/solutions if they resonate with him. He can also add a problem/solution if he has an idea that is not represented in the list.
+Ken explores the highest trending problems and solutions that his team members across Toyota are surfacing. He can decide to upvote problems/solutions if they resonate with him. He can also add a problem/solution if he has an idea that is not represented in the list.
 
 ![Desktop - 1 (1)](https://user-images.githubusercontent.com/125877341/225916631-a0d1dc61-fde1-4cda-9c03-53ce1d517268.png)
 
 <br/><br/>
 **Problem overview:**
-Today Kenzo decides to add a problem that he encountered to the list - His team is still using outdated modelling software and it causes delays. He goes to the problem overview where he adds the problem and upvotes some that resonate with him.
+Today Ken decides to add a problem that he encountered to the list - His team is still using outdated modelling software and it causes delays. He goes to the problem overview where he adds the problem and upvotes some that resonate with him.
 
 ![Desktop - 2](https://user-images.githubusercontent.com/125877341/225916556-7c7794be-4600-4f97-8859-b2ab4111d14d.png)
 
 <br/><br/>
 **Solution overview:**
-Afterwards Kenzo goes to the solution overview page where his colleagues have started to come up with ideas on how to address some of the prevailing problems. One particularly resonates with him and he decides to read more details.
+Afterwards Ken goes to the solution overview page where his colleagues have started to come up with ideas on how to address some of the prevailing problems. One particularly resonates with him and he decides to read more details.
 
 ![Desktop - 3](https://user-images.githubusercontent.com/125877341/225916492-fc0dfd6f-d46f-4db2-ae02-31cc1ce96a9f.png)
 
 
 <br/><br/>
 **Solution details:**
-Kenzo reads through the proposal details and decides to add some comments that he thinks will help his colleagues improve the solution.
+Ken reads through the proposal details and decides to add some comments that he thinks will help his colleagues improve the solution.
 
 ![Desktop - 12](https://user-images.githubusercontent.com/125877341/225916313-fb7177ae-eb83-4f3a-a110-e663e5bfb059.png)
 ![Desktop - 10](https://user-images.githubusercontent.com/125877341/225916375-abd0679d-2aca-4477-9a68-0abec25aeaae.png)
 
 <br/><br/>
 **Propose solution screen:**
-Kenzo also decides to add his own solution proposal. He links the problems the solution solves, and fills in the required fields. In a few clicks he submits the proposal.
+Ken also decides to add his own solution proposal. He links the problems the solution solves, and fills in the required fields. In a few clicks he submits the proposal.
 
 ![Desktop - 4](https://user-images.githubusercontent.com/125877341/225916418-9c93c84d-176a-44b7-b70f-90c4c4a717d2.png)
 
+<br/><br/>
+**Next Steps:**
+Now Ken  waits for the end of the month, where the central committee of Toyota will go through all the solutions and decide on what to fund and staff a team for.
+.
