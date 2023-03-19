@@ -10,7 +10,7 @@ npm run dev
 ```
 **Context:**
 
-This Github contains the contribution of Team RnDAO to the Toyota DAO Hackathon.
+This Github contains the contribution of Team RnDAO to the Toyota DAO Hackathon. 
 
 The goal of the hackathon was to address two challenges in Toyota:
 1. Increasing workload on managers due to an increase in business decision-making and team member management.
@@ -57,6 +57,8 @@ More concretely Toyota IDEA HQ allows the following:
 The most upvoted solutions can then be brought to the relevant Toyota committees that can fund and staff relevant teams to execute the ideas, pulling from the pool of people who have upvoted the problem. This part is out of scope of this proposal
 
 Because Toyota employees log in with their Astar wallets, contributions to Toyota IDEA HQ are mapped to their wallet address, and at a later point can be minted as contribution badges that employees can use to show their skills and level of participation. This part is out of scope of this proposal, but will be implemented as a next step.
+
+Note: Currently Toyota IDEA HQ does not separate employee access based on their department and job type. In the future smart filters/Sub DAO setups will be used to create a more targeted experience.
 
 <br/><br/>
 
