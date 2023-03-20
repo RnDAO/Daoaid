@@ -30,7 +30,7 @@ RnDAO is a DAO focused on researching and building DAO tooling. Our members have
 * Wutwut: web3 Freelance Product Manager - Ex Google/BCG, 2x Founder
 * William: Full-stack Blockchain Developer
 * Adebola: Full-stack Blockchain Developer and member of Gitcoin’s FDD unit
-* Nikku: Full-stack Blockchain Developer
+* Neeraj Choubisa (Nikku): Full-stack Blockchain Developer
 
 <br/><br/>
 
