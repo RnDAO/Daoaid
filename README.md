@@ -37,8 +37,8 @@ RnDAO is a DAO focused on researching and building DAO tooling. Our members have
 **Proposal Focus:**
 
 In our proposal, we focus on the following problems
-How do we help Toyota employees surface problems and solutions that are important to them? How do we do this without managers having to be the middleman of this process?
-How do we allow other members to constructively contribute to ideas that have been put forward? How do we do this avoiding the complexity and chaos that plague usual proposal discussions in DAOs?
+1. How do we help Toyota employees surface problems and solutions that are important to them? How do we do this without managers having to be the middleman of this process?
+2. How do we allow other members to constructively contribute to ideas that have been put forward? How do we do this avoiding the complexity and chaos that plague usual proposal discussions in DAOs?
 
 <br/><br/>
 
