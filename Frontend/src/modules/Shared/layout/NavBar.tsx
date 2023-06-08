@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom";
-import { ConnectKitButton } from "connectkit";
 import logo from "@assets/logo.png";
-import { useAccount } from "wagmi";
-import { connectWallet, disConnectWallet } from "../Blockchain.services";
-import { useEffect } from "react";
-import { truncate, useGlobalState } from "../store";
+//import { connectWallet, disConnectWallet } from "../Blockchain.services";
+
+//import { truncate, useGlobalState } from "../store";
 //import { login } from "../utils/auth";
 
-const Navbar = () => {
+export const Navbar = () => {
   // const { address, isConnecting, isDisconnected } = useAccount();
-  const [connectedAddress] = useGlobalState("connectedAddress");
+  //const [connectedAddress] = useGlobalState("connectedAddress");
   //const [userId] = useGlobalState("userId");
 
   return (
@@ -51,29 +49,27 @@ const Navbar = () => {
             {/* <span className="mt-1">
               <ConnectKitButton />
             </span> */}
-            {!connectedAddress && (
-              <button
-                className="w-fit py-2 px-3 bg-gray-200 rounded-md font-semibold hover:bg-rnBlack hover:text-white"
-                onClick={connectWallet}
-                type="button"
-              >
-                Connect wallet
-              </button>
-            )}
-            {connectedAddress && (
-              <button
-                className="w-fit py-2 px-3 bg-gray-200 rounded-md font-semibold hover:bg-rnBlack hover:text-white"
-                // onClick={disConnectWallet}
-                type="button"
-              >
-                {truncate(connectedAddress, 4, 4, 11)}
-              </button>
-            )}
+            {/* {!connectedAddress && ( */}
+            <button
+              className="w-fit py-2 px-3 bg-gray-200 rounded-md font-semibold hover:bg-rnBlack hover:text-white"
+              // onClick={connectWallet}
+              type="button"
+            >
+              Connect wallet
+            </button>
+            {/* )} */}
+            {/* {connectedAddress && ( */}
+            <button
+              className="w-fit py-2 px-3 bg-gray-200 rounded-md font-semibold hover:bg-rnBlack hover:text-white"
+              // onClick={disConnectWallet}
+              type="button"
+            >
+              {/* {truncate(connectedAddress, 4, 4, 11)} */}
+            </button>
+            {/* )} */}
           </ul>
         </div>
       </nav>
     </>
   );
 };
-
-export default Navbar;
