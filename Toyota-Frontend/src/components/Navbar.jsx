@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ConnectKitButton } from "connectkit";
-import logo from "../assets/logo.png";
+import logo from "@assets/logo.png";
 import { useAccount } from "wagmi";
 import { connectWallet, disConnectWallet } from "../Blockchain.services";
 import { useEffect } from "react";
