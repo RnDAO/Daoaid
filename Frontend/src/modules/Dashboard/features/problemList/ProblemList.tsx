@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Problems } from "@modules/Dashboard/components/problems";
-
+import { useQuery } from "react-query";
 //icon
 import { Oval } from "react-loading-icons";
 
 //store
-import useProblemStore from "@modules/Shared/store/problemStore";
+import { useProblemStore } from "@modules/Shared/store";
 
 //interfaces
 import { IProblem } from "@modules/Shared/interfaces/problemInterface";
@@ -15,17 +15,24 @@ import { IProblem } from "@modules/Shared/interfaces/problemInterface";
 import { getProblemsList } from "@modules/Shared/services/api";
 
 export const ProblemList = () => {
-  //   const [problems] = useGlobalState("problems");
   const store = useProblemStore();
+  const { data } = useQuery("problems", getProblemsList, {
+    staleTime: 2000,
+    onSuccess: (data) => {
+      //set problem store
+      store.setProblems(data.data.data.problems);
+    },
+  });
+
   // const [connectedAddress] = useGlobalState("connectedAddress");
   const [sortedList, setSortedList] = useState<IProblem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    //set problems in list
-    getProblemsList();
-    setIsLoading(true);
-  }, []);
+  //console.log(data?.data.data.problems, error);
+  // useEffect(() => {
+  //   //set problems in list
+  //   getProblemsList();
+  //   setIsLoading(true);
+  // }, []);
 
   //sort problems based on votes
   const sortList = (list: IProblem[]) => {

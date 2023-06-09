@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //icons
 import { toast } from "react-hot-toast";
@@ -6,11 +6,12 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { IoIosArrowUp } from "react-icons/io";
 
 //interfaces
-import { IProblem } from "@modules/Shared/interfaces";
+import { IProblem, IProblemVote } from "@modules/Shared/interfaces";
 import { Link } from "react-router-dom";
 
 //store
-import useProblemStore from "@modules/Shared/store/problemStore";
+import { useAuthStore, useProblemStore } from "@modules/Shared/store";
+import axiosInstance from "@modules/Shared/lib/axiosInstance";
 
 interface IProp {
   problem: IProblem;
@@ -20,85 +21,82 @@ export const Problems = ({ problem }: IProp) => {
   const [voted, setVote] = useState(false);
   const [upVotes, setUpVotes] = useState([]);
   const store = useProblemStore();
-  //const [connectedAddress] = useGlobalState("connectedAddress");
-  //const [userId] = useGlobalState("userId");
+  const authStore = useAuthStore();
 
-  const upvote = () => {
-    setVote(true);
+  const handleUpVote = async () => {
+    //@ts-ignore
+    if (!authStore.user.walletAddress) {
+      toast.error("Please connect a wallet.");
+      return;
+    }
+
+    try {
+      await axiosInstance({
+        // url of the api endpoint (can be changed)
+        url: `problems/${problem._id}/create-upvote`,
+        method: "POST",
+      }).then((res) => {
+        // handle success
+        getUpVotes();
+        setVote(true);
+      });
+    } catch (e) {
+      // handle error
+      toast.error("oops! an error occured , try again later.");
+      console.error(e);
+    }
   };
 
-  //   const handleUpVote = async (e) => {
-  //     e.preventDefault();
-  //     if (!connectedAddress) {
-  //       toast.error("Please connect a wallet.");
-  //       return;
-  //     }
-  //     if (!userId) return;
-  //     try {
-  //       await instance({
-  //         // url of the api endpoint (can be changed)
-  //         url: `problems/${problem._id}/create-upvote`,
-  //         method: "POST",
-  //       }).then((res) => {
-  //         // handle success
-  //         getUpVotes();
-  //         setVote(true);
-  //       });
-  //     } catch (e) {
-  //       // handle error
-  //       toast.error("oops! an error occured , try again later.");
-  //       console.error(e);
-  //     }
-  //   };
+  const removeUpVote = async () => {
+    //@ts-ignore
+    if (!authStore.user.id) return;
+    try {
+      await axiosInstance({
+        // url of the api endpoint (can be changed)
+        url: `problems/${problem._id}/remove-upvote`,
+        method: "DELETE",
+      }).then((res) => {
+        // handle success
+        getUpVotes();
+        setVote(false);
+      });
+    } catch (e) {
+      // handle error
+      console.error(e);
+    }
+  };
 
-  //   const removeUpVote = async (e) => {
-  //     e.preventDefault();
-  //     if (!userId) return;
-  //     try {
-  //       await instance({
-  //         // url of the api endpoint (can be changed)
-  //         url: `problems/${problem._id}/remove-upvote`,
-  //         method: "DELETE",
-  //       }).then((res) => {
-  //         // handle success
-  //         getUpVotes();
-  //         setVote(false);
-  //       });
-  //     } catch (e) {
-  //       // handle error
-  //       console.error(e);
-  //     }
-  //   };
+  const checkUserVote = (votes: IProblemVote[]) => {
+    //@ts-ignore
+    if (!authStore.user.id) return setVote(false);
+    let match = votes.filter((vote: IProblemVote) => {
+      //@ts-ignore
+      return vote.upvotedBy._id == authStore.user.id;
+    });
 
-  //   const checkUserVote = (votes) => {
-  //     if (!userId) return setVote(false);
-  //     let match = votes.filter((vote) => {
-  //       return vote.upvotedBy._id == userId;
-  //     });
+    match.length > 0 ? setVote(true) : setVote(false);
+  };
 
-  //     match.length > 0 ? setVote(true) : setVote(false);
-  //   };
+  const getUpVotes = async () => {
+    try {
+      await axiosInstance({
+        // url of the api endpoint (can be changed)
+        url: `problems/${problem._id}/upvotes`,
+        method: "GET",
+      }).then((res) => {
+        // handle success
+        setUpVotes(res.data.data.upvotes);
+        checkUserVote(res.data.data.upvotes);
+      });
+    } catch (e) {
+      // handle error
+      console.error(e);
+    }
+  };
 
-  //   const getUpVotes = async () => {
-  //     try {
-  //       await instance({
-  //         // url of the api endpoint (can be changed)
-  //         url: `problems/${problem._id}/upvotes`,
-  //         method: "GET",
-  //       }).then((res) => {
-  //         // handle success
-  //         setUpVotes(res.data.data.upvotes);
-  //         checkUserVote(res.data.data.upvotes);
-  //       });
-  //     } catch (e) {
-  //       // handle error
-  //       console.error(e);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     if (problem) getUpVotes();
-  //   }, [problem, userId]);
+  useEffect(() => {
+    if (problem) getUpVotes();
+  }, [problem]);
 
   return (
     <div className="h-auto flex mb-2 ">
@@ -109,7 +107,7 @@ export const Problems = ({ problem }: IProp) => {
           >
             <button
               type="button"
-              // onClick={removeUpVote}
+              onClick={removeUpVote}
               className="bg-green-400 text-white  rounded-sm h-fit w-6 px-1"
             >
               <AiOutlineCheck />
@@ -122,7 +120,7 @@ export const Problems = ({ problem }: IProp) => {
           >
             <button
               type="button"
-              //onClick={handleUpVote}
+              onClick={handleUpVote}
               className="bg-white rounded-sm h-fit w-6 px-1"
             >
               <IoIosArrowUp />

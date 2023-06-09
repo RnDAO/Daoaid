@@ -1,14 +1,11 @@
 import { Link } from "react-router-dom";
 import logo from "@assets/logo.png";
-//import { connectWallet, disConnectWallet } from "../Blockchain.services";
-
-//import { truncate, useGlobalState } from "../store";
-//import { login } from "../utils/auth";
+import { connectWallet, disConnectWallet } from "../services/blockchain";
+import { useAuthStore } from "../store";
+import { truncateAddress } from "@modules/Dashboard/utils";
 
 export const Navbar = () => {
-  // const { address, isConnecting, isDisconnected } = useAccount();
-  //const [connectedAddress] = useGlobalState("connectedAddress");
-  //const [userId] = useGlobalState("userId");
+  const store = useAuthStore();
 
   return (
     <>
@@ -49,24 +46,27 @@ export const Navbar = () => {
             {/* <span className="mt-1">
               <ConnectKitButton />
             </span> */}
-            {/* {!connectedAddress && ( */}
-            <button
-              className="w-fit py-2 px-3 bg-gray-200 rounded-md font-semibold hover:bg-rnBlack hover:text-white"
-              // onClick={connectWallet}
-              type="button"
-            >
-              Connect wallet
-            </button>
-            {/* )} */}
-            {/* {connectedAddress && ( */}
-            <button
-              className="w-fit py-2 px-3 bg-gray-200 rounded-md font-semibold hover:bg-rnBlack hover:text-white"
-              // onClick={disConnectWallet}
-              type="button"
-            >
-              {/* {truncate(connectedAddress, 4, 4, 11)} */}
-            </button>
-            {/* )} */}
+            {/* @ts-ignore */}
+            {!store.user.walletAddress && (
+              <button
+                className="w-fit py-2 px-3 bg-gray-200 rounded-md font-semibold hover:bg-rnBlack hover:text-white"
+                onClick={connectWallet}
+                type="button"
+              >
+                Connect wallet
+              </button>
+            )}
+            {/* @ts-ignore */}
+            {store.user.walletAddress && (
+              <button
+                className="w-fit py-2 px-3 bg-gray-200 rounded-md font-semibold hover:bg-rnBlack hover:text-white"
+                onClick={disConnectWallet}
+                type="button"
+              >
+                {/* @ts-ignore */}
+                {truncateAddress(store.user.walletAddress, 4, 4, 11)}
+              </button>
+            )}
           </ul>
         </div>
       </nav>
