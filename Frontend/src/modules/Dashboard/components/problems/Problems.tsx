@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useQuery, useQueryClient } from "react-query";
 
 //icons
 import { toast } from "react-hot-toast";
@@ -13,6 +14,13 @@ import { Link } from "react-router-dom";
 import { useAuthStore, useProblemStore } from "@modules/Shared/store";
 import axiosInstance from "@modules/Shared/lib/axiosInstance";
 
+//services
+import {
+  addUpvote,
+  deleteUpvote,
+  getUpVotes,
+} from "@modules/Shared/services/api";
+
 interface IProp {
   problem: IProblem;
 }
@@ -23,47 +31,11 @@ export const Problems = ({ problem }: IProp) => {
   const store = useProblemStore();
   const authStore = useAuthStore();
 
-  const handleUpVote = async () => {
-    //@ts-ignore
-    if (!authStore.user.walletAddress) {
-      toast.error("Please connect a wallet.");
-      return;
-    }
+  const queryClient = useQueryClient();
 
-    try {
-      await axiosInstance({
-        // url of the api endpoint (can be changed)
-        url: `problems/${problem._id}/create-upvote`,
-        method: "POST",
-      }).then((res) => {
-        // handle success
-        getUpVotes();
-        setVote(true);
-      });
-    } catch (e) {
-      // handle error
-      toast.error("oops! an error occured , try again later.");
-      console.error(e);
-    }
-  };
-
-  const removeUpVote = async () => {
-    //@ts-ignore
-    if (!authStore.user.id) return;
-    try {
-      await axiosInstance({
-        // url of the api endpoint (can be changed)
-        url: `problems/${problem._id}/remove-upvote`,
-        method: "DELETE",
-      }).then((res) => {
-        // handle success
-        getUpVotes();
-        setVote(false);
-      });
-    } catch (e) {
-      // handle error
-      console.error(e);
-    }
+  //reload vote counts query
+  const reloadVoteCount = () => {
+    queryClient.invalidateQueries("upvotes");
   };
 
   const checkUserVote = (votes: IProblemVote[]) => {
@@ -76,27 +48,63 @@ export const Problems = ({ problem }: IProp) => {
 
     match.length > 0 ? setVote(true) : setVote(false);
   };
+  const { data } = useQuery(["upvotes", problem], () => getUpVotes(problem), {
+    staleTime: 2000,
+    onSuccess: (data) => {
+      //set problem store
+      //@ts-ignore
+      setUpVotes(data.data.data.upvotes);
+      checkUserVote(data.data.data.upvotes);
+    },
+  });
 
-  const getUpVotes = async () => {
-    try {
-      await axiosInstance({
-        // url of the api endpoint (can be changed)
-        url: `problems/${problem._id}/upvotes`,
-        method: "GET",
-      }).then((res) => {
-        // handle success
-        setUpVotes(res.data.data.upvotes);
-        checkUserVote(res.data.data.upvotes);
-      });
-    } catch (e) {
+  const handleUpVote = async () => {
+    //@ts-ignore
+    if (!authStore.user.walletAddress) {
+      toast.error("Please connect a wallet.");
+      return;
+    }
+    if (await addUpvote(problem)) {
+      reloadVoteCount();
+      setVote(true);
+    } else {
       // handle error
-      console.error(e);
+      toast.error("oops! an error occured , try again later.");
     }
   };
 
-  useEffect(() => {
-    if (problem) getUpVotes();
-  }, [problem]);
+  const removeUpVote = async () => {
+    //@ts-ignore
+    if (!authStore.user.id) return;
+    if (await deleteUpvote(problem)) {
+      reloadVoteCount();
+      setVote(false);
+    } else {
+      // handle error
+      toast.error("oops! an error occured , try again later.");
+    }
+  };
+
+  // const getUpVotes = async () => {
+  //   try {
+  //     await axiosInstance({
+  //       // url of the api endpoint (can be changed)
+  //       url: `problems/${problem._id}/upvotes`,
+  //       method: "GET",
+  //     }).then((res) => {
+  //       // handle success
+  //       setUpVotes(res.data.data.upvotes);
+  //       checkUserVote(res.data.data.upvotes);
+  //     });
+  //   } catch (e) {
+  //     // handle error
+  //     console.error(e);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (problem) getUpVotes();
+  // }, [problem]);
 
   return (
     <div className="h-auto flex mb-2 ">
