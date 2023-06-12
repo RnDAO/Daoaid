@@ -1,17 +1,36 @@
 import { useState, useEffect } from "react";
-import { IoIosArrowUp } from "react-icons/io";
-import { AiOutlineCheck } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
 // import { setGlobalState, useGlobalState } from "../store";
 // import { getSolutionsList } from "../utils/solutions";
 //import instance from "../axiosInstance";
+
+//icons
 import { toast } from "react-hot-toast";
 import { Oval } from "react-loading-icons";
 
+//store
+import { useSolutionStore } from "@modules/Shared/store/solutionStore";
+
+//interfaces
+import { ISolution } from "@modules/Shared/interfaces/solutionInterface";
+
+//services
+import { getSolutionsList } from "@modules/Shared/services/api";
+import { Solutions } from "@modules/Dashboard/components/solutions";
+
 export const SolutionList = () => {
+  const store = useSolutionStore();
+  const {} = useQuery("solutions", getSolutionsList, {
+    staleTime: 2000,
+    onSuccess: (data) => {
+      //set problem store
+      store.setSolutions(data.data.data.solutions);
+    },
+  });
   //   const [solutions] = useGlobalState("solutions");
-  //   const [isLoading, setIsLoading] = useState(true);
-  //   const [sortedList, setSortedList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [sortedList, setSortedList] = useState<ISolution[]>([]);
 
   //   useEffect(() => {
   //     //get solutions
@@ -19,21 +38,21 @@ export const SolutionList = () => {
   //     setIsLoading(true);
   //   }, []);
 
-  //   //sort list based on votes
-  //   const sortList = (list) => {
-  //     setIsLoading(true);
+  //sort list based on votes
+  const sortList = (list: ISolution[]) => {
+    setIsLoading(true);
 
-  //     let newList = [...list].sort((a, b) => b.upvotes - a.upvotes);
+    let newList = [...list].sort((a, b) => b.upvotes - a.upvotes);
 
-  //     setSortedList(newList);
+    setSortedList(newList);
 
-  //     setIsLoading(false);
-  //   };
+    setIsLoading(false);
+  };
 
-  //   useEffect(() => {
-  //     //set set solutions in list
-  //     sortList(solutions);
-  //   }, [solutions]);
+  useEffect(() => {
+    //set set solutions in list
+    sortList(store.solutions);
+  }, [store.solutions]);
   return (
     <div className="col-span-1 h-full overflow-auto ">
       <div className=" flex justify-between items-center h-[10%]  pl-12">
@@ -48,7 +67,7 @@ export const SolutionList = () => {
         </Link>
       </div>
       <div className="h-[80%] px-2 overflow-y-auto ">
-        {/* {isLoading ? (
+        {isLoading ? (
           <div className=" w-fit h-full flex items-center m-auto">
             <Oval strokeWidth={4} stroke="#000000" fill="transparent" />
           </div>
@@ -58,7 +77,7 @@ export const SolutionList = () => {
           ))
         ) : (
           ""
-        )} */}
+        )}
       </div>
       <Link
         to="/solutions"

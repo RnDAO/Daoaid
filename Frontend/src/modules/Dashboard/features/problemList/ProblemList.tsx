@@ -16,7 +16,7 @@ import { getProblemsList } from "@modules/Shared/services/api";
 
 export const ProblemList = () => {
   const store = useProblemStore();
-  const { data } = useQuery("problems", getProblemsList, {
+  const {} = useQuery("problems", getProblemsList, {
     staleTime: 2000,
     onSuccess: (data) => {
       //set problem store
@@ -28,11 +28,6 @@ export const ProblemList = () => {
   const [sortedList, setSortedList] = useState<IProblem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   //console.log(data?.data.data.problems, error);
-  // useEffect(() => {
-  //   //set problems in list
-  //   getProblemsList();
-  //   setIsLoading(true);
-  // }, []);
 
   //sort problems based on votes
   const sortList = (list: IProblem[]) => {

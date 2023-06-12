@@ -1,20 +1,20 @@
-import { IProblem } from "@modules/Shared/interfaces";
+import { ISolution } from "@modules/Shared/interfaces/solutionInterface";
 import axiosInstance from "@modules/Shared/lib/axiosInstance";
 
-export const getProblemsList = async () => {
+export const getSolutionsList = async () => {
   const res = await axiosInstance({
     // url of the api endpoint (can be changed)
-    url: "problems/",
+    url: "solutions/",
     method: "GET",
   });
 
   return res;
 };
 
-export const getProblemUpVotes = async (problem: IProblem) => {
+export const getSolutionUpVotes = async (solution: ISolution) => {
   const res = await axiosInstance({
     // url of the api endpoint (can be changed)
-    url: `problems/${problem._id}/upvotes`,
+    url: `solutions/${solution._id}/upvotes`,
     method: "GET",
   });
   // handle success
@@ -23,11 +23,11 @@ export const getProblemUpVotes = async (problem: IProblem) => {
   //checkUserVote(res.data.data.upvotes);
 };
 
-export const deleteProblemUpvote = async (problem: IProblem) => {
+export const deleteSolutionUpvote = async (solution: ISolution) => {
   try {
     await axiosInstance({
       // url of the api endpoint (can be changed)
-      url: `problems/${problem._id}/remove-upvote`,
+      url: `solutions/${solution._id}/remove-upvote`,
       method: "DELETE",
     });
     return true;
@@ -35,11 +35,11 @@ export const deleteProblemUpvote = async (problem: IProblem) => {
     return false;
   }
 };
-export const addProblemUpvote = async (problem: IProblem) => {
+export const addSolutionUpvote = async (solution: ISolution) => {
   try {
     await axiosInstance({
       // url of the api endpoint (can be changed)
-      url: `problems/${problem._id}/create-upvote`,
+      url: `solutions/${solution._id}/create-upvote`,
       method: "POST",
     });
     return true;

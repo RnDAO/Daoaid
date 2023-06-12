@@ -1,61 +1,69 @@
 import { useState } from "react";
-import { useQuery, useQueryClient } from "react-query";
 
 //icons
-import { toast } from "react-hot-toast";
-import { AiOutlineCheck } from "react-icons/ai";
 import { IoIosArrowUp } from "react-icons/io";
+import { AiOutlineCheck } from "react-icons/ai";
 
 //interfaces
-import { IProblem, IProblemVote } from "@modules/Shared/interfaces";
-import { Link } from "react-router-dom";
+import {
+  ISolution,
+  ISolutionVote,
+} from "@modules/Shared/interfaces/solutionInterface";
 
 //store
-import { useAuthStore, useProblemStore } from "@modules/Shared/store";
-
-//services
+import { useSolutionStore } from "@modules/Shared/store/solutionStore";
+import { useAuthStore } from "@modules/Shared/store";
+import { toast } from "react-hot-toast";
 import {
-  addProblemUpvote,
-  deleteProblemUpvote,
-  getProblemUpVotes,
+  addSolutionUpvote,
+  deleteSolutionUpvote,
+  getSolutionUpVotes,
 } from "@modules/Shared/services/api";
+import { useQuery, useQueryClient } from "react-query";
+import { Link } from "react-router-dom";
 
 interface IProp {
-  problem: IProblem;
+  solution: ISolution;
 }
 
-export const Problems = ({ problem }: IProp) => {
+export const Solutions = ({ solution }: IProp) => {
   const [voted, setVote] = useState(false);
   const [upVotes, setUpVotes] = useState([]);
-  const store = useProblemStore();
+
+  const store = useSolutionStore();
   const authStore = useAuthStore();
 
   const queryClient = useQueryClient();
 
   //reload vote counts query
   const reloadVoteCount = () => {
-    queryClient.invalidateQueries("upvotes");
+    queryClient.invalidateQueries("solutionUpVotes");
   };
 
-  const checkUserVote = (votes: IProblemVote[]) => {
+  const checkUserVote = (votes: ISolutionVote[]) => {
     //@ts-ignore
     if (!authStore.user.id) return setVote(false);
-    let match = votes.filter((vote: IProblemVote) => {
+    let match = votes.filter((vote) => {
       //@ts-ignore
       return vote.upvotedBy._id == authStore.user.id;
     });
 
     match.length > 0 ? setVote(true) : setVote(false);
   };
-  const {} = useQuery(["upvotes", problem], () => getProblemUpVotes(problem), {
-    staleTime: 2000,
-    onSuccess: (data) => {
-      //set problem store
-      //@ts-ignore
-      setUpVotes(data.data.data.upvotes);
-      checkUserVote(data.data.data.upvotes);
-    },
-  });
+
+  const {} = useQuery(
+    ["solutionUpVotes", solution],
+    () => getSolutionUpVotes(solution),
+    {
+      staleTime: 2000,
+      onSuccess: (data) => {
+        //set problem store
+        //@ts-ignore
+        setUpVotes(data.data.data.upvotes);
+        checkUserVote(data.data.data.upvotes);
+      },
+    }
+  );
 
   const handleUpVote = async () => {
     //@ts-ignore
@@ -63,7 +71,7 @@ export const Problems = ({ problem }: IProp) => {
       toast.error("Please connect a wallet.");
       return;
     }
-    if (await addProblemUpvote(problem)) {
+    if (await addSolutionUpvote(solution)) {
       reloadVoteCount();
       setVote(true);
     } else {
@@ -75,7 +83,7 @@ export const Problems = ({ problem }: IProp) => {
   const removeUpVote = async () => {
     //@ts-ignore
     if (!authStore.user.id) return;
-    if (await deleteProblemUpvote(problem)) {
+    if (await deleteSolutionUpvote(solution)) {
       reloadVoteCount();
       setVote(false);
     } else {
@@ -83,27 +91,6 @@ export const Problems = ({ problem }: IProp) => {
       toast.error("oops! an error occured , try again later.");
     }
   };
-
-  // const getProblemUpvotes = async () => {
-  //   try {
-  //     await axiosInstance({
-  //       // url of the api endpoint (can be changed)
-  //       url: `problems/${problem._id}/upvotes`,
-  //       method: "GET",
-  //     }).then((res) => {
-  //       // handle success
-  //       setUpVotes(res.data.data.upvotes);
-  //       checkUserVote(res.data.data.upvotes);
-  //     });
-  //   } catch (e) {
-  //     // handle error
-  //     console.error(e);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (problem) getUpVotes();
-  // }, [problem]);
 
   return (
     <div className="h-auto flex mb-2 ">
@@ -142,19 +129,24 @@ export const Problems = ({ problem }: IProp) => {
         </div>
       </div>
       <Link
-        to="/proposal"
-        onClick={() => store.setFocusedProblems([problem])}
-        className="w-[90%] ml-1 bg-white flex flex-col  rounded-md h-auto px-4 hover:shadow-lg shadow-gray-500 "
+        to={`proposal/${solution._id}`}
+        onClick={() => {
+          store.setSelectedsolution(solution);
+          //setGlobalState("comments", []);
+        }}
       >
-        <div className="h-[41px]   flex items-end font-semibold text-sm text-rnBlack">
-          <span>
-            {problem.title.charAt(0).toUpperCase() + problem.title.slice(1)}
-          </span>
-        </div>
-        <div className="h-auto min-h-[41px] pb-2 text-textGray  flex items-start  text-xs">
-          {problem.description.substr(0, 100)}{" "}
-          {problem.description.length > 100 ? ". . ." : ""}
-          {}
+        <div className="w-[90%] h-auto ml-1 bg-white hover:shadow-lg shadow-gray-500 flex flex-col  rounded-md  px-4">
+          <div className="h-[41px]   flex items-end font-semibold text-sm text-rnBlack">
+            <span>
+              {solution.title.charAt(0).toUpperCase() + solution.title.slice(1)}
+            </span>
+          </div>
+          <div className="h-auto min-h-[41px] pb-2 text-textGray  flex items-start  text-xs">
+            <span>
+              {solution.description.substr(0, 100)}{" "}
+              {solution.description.length > 100 ? ". . ." : ""}
+            </span>
+          </div>
         </div>
       </Link>
     </div>
