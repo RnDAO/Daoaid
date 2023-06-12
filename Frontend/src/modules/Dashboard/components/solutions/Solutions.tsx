@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useQuery, useQueryClient } from "react-query";
+import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 //icons
 import { IoIosArrowUp } from "react-icons/io";
@@ -13,14 +16,13 @@ import {
 //store
 import { useSolutionStore } from "@modules/Shared/store/solutionStore";
 import { useAuthStore } from "@modules/Shared/store";
-import { toast } from "react-hot-toast";
+
+//services
 import {
   addSolutionUpvote,
   deleteSolutionUpvote,
   getSolutionUpVotes,
 } from "@modules/Shared/services/api";
-import { useQuery, useQueryClient } from "react-query";
-import { Link } from "react-router-dom";
 
 interface IProp {
   solution: ISolution;

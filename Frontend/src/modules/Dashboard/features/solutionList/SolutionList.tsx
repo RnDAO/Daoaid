@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
-// import { setGlobalState, useGlobalState } from "../store";
-// import { getSolutionsList } from "../utils/solutions";
-//import instance from "../axiosInstance";
+import { Solutions } from "@modules/Dashboard/components/solutions";
 
 //icons
-import { toast } from "react-hot-toast";
 import { Oval } from "react-loading-icons";
 
 //store
@@ -17,7 +14,6 @@ import { ISolution } from "@modules/Shared/interfaces/solutionInterface";
 
 //services
 import { getSolutionsList } from "@modules/Shared/services/api";
-import { Solutions } from "@modules/Dashboard/components/solutions";
 
 export const SolutionList = () => {
   const store = useSolutionStore();
