@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 
 //icons
@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 
 //store
 import { useAuthStore, useProblemStore } from "@modules/Shared/store";
-import axiosInstance from "@modules/Shared/lib/axiosInstance";
 
 //services
 import {
@@ -48,7 +47,7 @@ export const Problems = ({ problem }: IProp) => {
 
     match.length > 0 ? setVote(true) : setVote(false);
   };
-  const { data } = useQuery(["upvotes", problem], () => getUpVotes(problem), {
+  const {} = useQuery(["upvotes", problem], () => getUpVotes(problem), {
     staleTime: 2000,
     onSuccess: (data) => {
       //set problem store

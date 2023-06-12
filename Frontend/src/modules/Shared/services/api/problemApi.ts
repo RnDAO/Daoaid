@@ -25,7 +25,7 @@ export const getUpVotes = async (problem: IProblem) => {
 
 export const deleteUpvote = async (problem: IProblem) => {
   try {
-    const res = await axiosInstance({
+    await axiosInstance({
       // url of the api endpoint (can be changed)
       url: `problems/${problem._id}/remove-upvote`,
       method: "DELETE",
@@ -37,7 +37,7 @@ export const deleteUpvote = async (problem: IProblem) => {
 };
 export const addUpvote = async (problem: IProblem) => {
   try {
-    const res = await axiosInstance({
+    await axiosInstance({
       // url of the api endpoint (can be changed)
       url: `problems/${problem._id}/create-upvote`,
       method: "POST",
