@@ -6,6 +6,7 @@ import { Navbar } from "@modules/Shared/layout";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { ProblemsBoard } from "@modules/ProblemsBoard";
 //import { isWallectConnected } from "@modules/Shared/services/blockchain";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/problems" element={<ProblemsBoard />} />
         </Routes>
       </div>
       <ReactQueryDevtools initialIsOpen={false} />

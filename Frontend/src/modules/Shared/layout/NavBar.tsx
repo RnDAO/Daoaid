@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "@assets/logo.png";
 import { connectWallet, disConnectWallet } from "../services/blockchain";
 import { useAuthStore } from "../store";
-import { truncateAddress } from "@modules/Dashboard/utils";
+import { truncateAddress } from "@modules/Shared/utils";
 
 export const Navbar = () => {
   const store = useAuthStore();
